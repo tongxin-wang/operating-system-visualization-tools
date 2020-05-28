@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryAllocation", "MemoryAllocation\MemoryAllocation.csproj", "{FFE0065F-7ACA-4E88-910F-30999F698BB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormMemAllocation", "WinFormMemAllocation\WinFormMemAllocation.csproj", "{26CFFF16-D169-4DCD-9B6C-913F727C2B12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFE0065F-7ACA-4E88-910F-30999F698BB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFE0065F-7ACA-4E88-910F-30999F698BB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFE0065F-7ACA-4E88-910F-30999F698BB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFE0065F-7ACA-4E88-910F-30999F698BB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26CFFF16-D169-4DCD-9B6C-913F727C2B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26CFFF16-D169-4DCD-9B6C-913F727C2B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26CFFF16-D169-4DCD-9B6C-913F727C2B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26CFFF16-D169-4DCD-9B6C-913F727C2B12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5265A84C-8FBA-42D0-9CDE-04DE116B999F}
+	EndGlobalSection
+EndGlobal
