@@ -154,13 +154,13 @@ namespace BankerAlgorithm
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_run_Click(object sender, EventArgs e)
         {
             Task<bool> t2 = new Task<bool>( () => 
                 this.basic.addRequestT(this.demand.A,this.demand.B,this.demand.C,this.name)
             );
             t2.Start();
-            button1.Enabled = false;
+            button_run.Enabled = false;
             //t2.Wait()
             
             Task.WaitAll(t2);

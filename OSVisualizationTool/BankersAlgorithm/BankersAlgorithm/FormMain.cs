@@ -47,16 +47,16 @@ namespace BankerAlgorithm
             defaultItems.Add(new ListItem("1", "超出资源需求的申请"));
             defaultItems.Add(new ListItem("2", "复杂的成功申请"));
             defaultItems.Add(new ListItem("3", "预分配产生死锁的申请"));
-            comboBox2.DisplayMember = "Text";        //显示
-            comboBox2.ValueMember = "Value";        //值
-            comboBox2.DataSource = defaultItems;        //绑定数据
-            comboBox2.SelectedIndex = -1;
+            comboBox_selectTemp.DisplayMember = "Text";        //显示
+            comboBox_selectTemp.ValueMember = "Value";        //值
+            comboBox_selectTemp.DataSource = defaultItems;        //绑定数据
+            comboBox_selectTemp.SelectedIndex = -1;
             //items.Add(new ListItem("5", "Item_5_Text"));
             this.label_detail.Visible = false;
-            this.listBox2.Visible = false;
-            comboBox1.DisplayMember = "Text";        //显示
-            comboBox1.ValueMember = "Value";        //值
-            comboBox1.DataSource = items;        //绑定数据
+            this.listBox_tempDetail.Visible = false;
+            comboBox_selectProcess.DisplayMember = "Text";        //显示
+            comboBox_selectProcess.ValueMember = "Value";        //值
+            comboBox_selectProcess.DataSource = items;        //绑定数据
             label_AM.Text = basic.available.A.ToString();
             label_BM.Text = basic.available.B.ToString();
             label_CM.Text = basic.available.C.ToString();
@@ -246,7 +246,7 @@ namespace BankerAlgorithm
         {
             if (switchFlag == false)
             {
-                if (basic.addRequest(trackBarA.Value, trackBarB.Value, trackBarC.Value, comboBox1.SelectedItem.ToString()))
+                if (basic.addRequest(trackBarA.Value, trackBarB.Value, trackBarC.Value, comboBox_selectProcess.SelectedItem.ToString()))
                 {
                     barReset();
                     button1_Click(sender, e);
@@ -307,7 +307,7 @@ namespace BankerAlgorithm
         {
             //basic.addRequest(1, 1, 1, "P4");
             //basic.addRequest(1, 1, 1, "P0");
-            FormOperating form3 = new FormOperating(this.basic,new Resourse(trackBarA.Value, trackBarB.Value, trackBarC.Value), comboBox1.SelectedItem.ToString());
+            FormOperating form3 = new FormOperating(this.basic,new Resourse(trackBarA.Value, trackBarB.Value, trackBarC.Value), comboBox_selectProcess.SelectedItem.ToString());
             form3.Show();
             button1_Click(sender, e);
             form3.TransfEvent +=new FormOperating.TransfDelegate(refresh);
@@ -393,19 +393,19 @@ namespace BankerAlgorithm
         }
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex != -1)
+            if (comboBox_selectTemp.SelectedIndex != -1)
             {
                 this.label_detail.Visible = true ;
-                this.listBox2.Visible = true;
-                listBox2.Items.Clear();
-                addInfo(listBox2, comboBox2.SelectedIndex);
+                this.listBox_tempDetail.Visible = true;
+                listBox_tempDetail.Items.Clear();
+                addInfo(listBox_tempDetail, comboBox_selectTemp.SelectedIndex);
 
             }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            switch (comboBox2.SelectedIndex)
+            switch (comboBox_selectTemp.SelectedIndex)
             {
                 case -1:
                     {
@@ -450,7 +450,7 @@ namespace BankerAlgorithm
                     }
                 default:
                     {
-                        listBox2.Items.Add("出现了问题");
+                        listBox_tempDetail.Items.Add("出现了问题");
                         break;
                     }
             }

@@ -20,8 +20,8 @@ namespace BankerAlgorithm
         {
             InitializeComponent();
 
-            comboBox1.DisplayMember = "Text";        //显示
-            comboBox1.ValueMember = "Value";        //值
+            comboBox_chooseTemp.DisplayMember = "Text";        //显示
+            comboBox_chooseTemp.ValueMember = "Value";        //值
 
             string path = @"./";
             DirectoryInfo d = new DirectoryInfo(path);
@@ -31,27 +31,27 @@ namespace BankerAlgorithm
                 if(f.Name.Remove(0,f.Name.Length-4)==".xml")
                     listItems.Add(new ListItem("0", f.Name.Remove(f.Name.Length-4)));
             }
-            comboBox1.DataSource = listItems;        //绑定数据 
+            comboBox_chooseTemp.DataSource = listItems;        //绑定数据 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if(TransfEvent!=null)
-                TransfEvent(dic,comboBox1.SelectedItem.ToString());
+                TransfEvent(dic,comboBox_chooseTemp.SelectedItem.ToString());
             this.Dispose();
             
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string path = comboBox1.SelectedItem.ToString()+".xml";
+            string path = comboBox_chooseTemp.SelectedItem.ToString()+".xml";
             dic=FormTest.Import(path);
-            listBox1.Items.Clear();
-            listBox1.Items.Add("Available:  " + dic["SA"] + "," + dic["SB"] + "," + dic["SC"]);
+            listBox_showAllTemplate.Items.Clear();
+            listBox_showAllTemplate.Items.Add("Available:  " + dic["SA"] + "," + dic["SB"] + "," + dic["SC"]);
             for (int i = 0; i < 5; i++)
             {
                 string str = $"{"P" + i}:  {dic[i + "A"]},{dic[i + "B"]},{dic[i + "C"]}";
-                listBox1.Items.Add(str);
+                listBox_showAllTemplate.Items.Add(str);
             }
         }
     }

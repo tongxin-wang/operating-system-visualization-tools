@@ -33,7 +33,7 @@
             this.trackBarB = new System.Windows.Forms.TrackBar();
             this.trackBarC = new System.Windows.Forms.TrackBar();
             this.trackBarA = new System.Windows.Forms.TrackBar();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox_selectProcess = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -56,17 +56,17 @@
             this.label_BM = new System.Windows.Forms.Label();
             this.label_CM = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox_selectTemp = new System.Windows.Forms.ComboBox();
+            this.listBox_tempDetail = new System.Windows.Forms.ListBox();
+            this.button_defaultRun = new System.Windows.Forms.Button();
             this.Switch_btn = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button_run = new System.Windows.Forms.Button();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button_refresh = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label_detail = new System.Windows.Forms.Label();
             this.groupBox_default = new System.Windows.Forms.GroupBox();
@@ -124,16 +124,16 @@
             this.trackBarA.TabIndex = 7;
             this.trackBarA.ValueChanged += new System.EventHandler(this.trackBarA_ValueChanged);
             // 
-            // comboBox1
+            // comboBox_selectProcess
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("宋体", 15F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(790, 107);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 28);
-            this.comboBox1.TabIndex = 8;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox_selectProcess.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_selectProcess.Font = new System.Drawing.Font("宋体", 15F);
+            this.comboBox_selectProcess.FormattingEnabled = true;
+            this.comboBox_selectProcess.Location = new System.Drawing.Point(790, 107);
+            this.comboBox_selectProcess.Name = "comboBox_selectProcess";
+            this.comboBox_selectProcess.Size = new System.Drawing.Size(121, 28);
+            this.comboBox_selectProcess.TabIndex = 8;
+            this.comboBox_selectProcess.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -354,38 +354,38 @@
             this.label17.TabIndex = 46;
             this.label17.Text = "是否开启动态过程模拟";
             // 
-            // comboBox2
+            // comboBox_selectTemp
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Font = new System.Drawing.Font("宋体", 15F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(204, 20);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(240, 28);
-            this.comboBox2.TabIndex = 47;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.comboBox_selectTemp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_selectTemp.Font = new System.Drawing.Font("宋体", 15F);
+            this.comboBox_selectTemp.FormattingEnabled = true;
+            this.comboBox_selectTemp.Location = new System.Drawing.Point(204, 20);
+            this.comboBox_selectTemp.Name = "comboBox_selectTemp";
+            this.comboBox_selectTemp.Size = new System.Drawing.Size(240, 28);
+            this.comboBox_selectTemp.TabIndex = 47;
+            this.comboBox_selectTemp.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
-            // listBox2
+            // listBox_tempDetail
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(204, 61);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(240, 112);
-            this.listBox2.TabIndex = 48;
+            this.listBox_tempDetail.FormattingEnabled = true;
+            this.listBox_tempDetail.ItemHeight = 12;
+            this.listBox_tempDetail.Location = new System.Drawing.Point(204, 61);
+            this.listBox_tempDetail.Name = "listBox_tempDetail";
+            this.listBox_tempDetail.Size = new System.Drawing.Size(240, 112);
+            this.listBox_tempDetail.TabIndex = 48;
             // 
-            // button1
+            // button_defaultRun
             // 
-            this.button1.BackgroundImage = global::BankerAlgorithm.Properties.Resources.箭头;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(440, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 43);
-            this.button1.TabIndex = 49;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button_defaultRun.BackgroundImage = global::BankerAlgorithm.Properties.Resources.箭头;
+            this.button_defaultRun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_defaultRun.FlatAppearance.BorderSize = 0;
+            this.button_defaultRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_defaultRun.Location = new System.Drawing.Point(440, 12);
+            this.button_defaultRun.Name = "button_defaultRun";
+            this.button_defaultRun.Size = new System.Drawing.Size(75, 43);
+            this.button_defaultRun.TabIndex = 49;
+            this.button_defaultRun.UseVisualStyleBackColor = true;
+            this.button_defaultRun.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Switch_btn
             // 
@@ -400,18 +400,18 @@
             this.Switch_btn.UseVisualStyleBackColor = true;
             this.Switch_btn.Click += new System.EventHandler(this.Switch_btn_Click);
             // 
-            // button2
+            // button_run
             // 
-            this.button2.BackgroundImage = global::BankerAlgorithm.Properties.Resources.icon_test_1;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(992, 295);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(85, 86);
-            this.button2.TabIndex = 3;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button_run.BackgroundImage = global::BankerAlgorithm.Properties.Resources.icon_test_1;
+            this.button_run.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_run.FlatAppearance.BorderSize = 0;
+            this.button_run.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_run.Location = new System.Drawing.Point(992, 295);
+            this.button_run.Name = "button_run";
+            this.button_run.Size = new System.Drawing.Size(85, 86);
+            this.button_run.TabIndex = 3;
+            this.button_run.UseVisualStyleBackColor = true;
+            this.button_run.Click += new System.EventHandler(this.button2_Click);
             // 
             // pictureBox6
             // 
@@ -458,19 +458,19 @@
             this.pictureBox1.TabIndex = 37;
             this.pictureBox1.TabStop = false;
             // 
-            // button3
+            // button_refresh
             // 
-            this.button3.BackgroundImage = global::BankerAlgorithm.Properties.Resources.icon_test;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(937, 105);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(31, 30);
-            this.button3.TabIndex = 17;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.button_refresh.BackgroundImage = global::BankerAlgorithm.Properties.Resources.icon_test;
+            this.button_refresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_refresh.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.button_refresh.FlatAppearance.BorderSize = 0;
+            this.button_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_refresh.Location = new System.Drawing.Point(937, 105);
+            this.button_refresh.Name = "button_refresh";
+            this.button_refresh.Size = new System.Drawing.Size(31, 30);
+            this.button_refresh.TabIndex = 17;
+            this.button_refresh.UseVisualStyleBackColor = true;
+            this.button_refresh.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // label18
             // 
@@ -494,11 +494,11 @@
             // 
             // groupBox_default
             // 
-            this.groupBox_default.Controls.Add(this.comboBox2);
+            this.groupBox_default.Controls.Add(this.comboBox_selectTemp);
             this.groupBox_default.Controls.Add(this.label_detail);
-            this.groupBox_default.Controls.Add(this.listBox2);
+            this.groupBox_default.Controls.Add(this.listBox_tempDetail);
             this.groupBox_default.Controls.Add(this.label18);
-            this.groupBox_default.Controls.Add(this.button1);
+            this.groupBox_default.Controls.Add(this.button_defaultRun);
             this.groupBox_default.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox_default.Location = new System.Drawing.Point(608, 386);
             this.groupBox_default.Name = "groupBox_default";
@@ -508,7 +508,7 @@
             this.groupBox_default.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox_default_Paint);
             this.groupBox_default.Enter += new System.EventHandler(this.groupBox_default_Enter);
             // 
-            // Form2
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -516,7 +516,7 @@
             this.Controls.Add(this.groupBox_default);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.Switch_btn);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button_run);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
@@ -537,21 +537,21 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.label_Bval);
             this.Controls.Add(this.label_Cval);
             this.Controls.Add(this.label_Aval);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBox_selectProcess);
             this.Controls.Add(this.trackBarA);
             this.Controls.Add(this.trackBarC);
             this.Controls.Add(this.trackBarB);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("楷体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Name = "Form2";
+            this.Name = "FormMain";
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarC)).EndInit();
@@ -572,18 +572,18 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_run;
         private System.Windows.Forms.TrackBar trackBarB;
         private System.Windows.Forms.TrackBar trackBarC;
         private System.Windows.Forms.TrackBar trackBarA;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox_selectProcess;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label_Aval;
         private System.Windows.Forms.Label label_Cval;
         private System.Windows.Forms.Label label_Bval;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_refresh;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
@@ -606,9 +606,9 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Button Switch_btn;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBox_selectTemp;
+        private System.Windows.Forms.ListBox listBox_tempDetail;
+        private System.Windows.Forms.Button button_defaultRun;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label_detail;
         private System.Windows.Forms.GroupBox groupBox_default;

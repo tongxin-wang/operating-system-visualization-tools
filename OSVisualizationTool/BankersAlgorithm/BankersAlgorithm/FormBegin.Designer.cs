@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_useDefault = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxSA = new System.Windows.Forms.TextBox();
             this.textBoxSC = new System.Windows.Forms.TextBox();
@@ -57,9 +57,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.button_refresh = new System.Windows.Forms.Button();
+            this.button_goMain = new System.Windows.Forms.Button();
+            this.button_export = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -72,15 +72,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "设置初始值";
             // 
-            // button1
+            // button_useDefault
             // 
-            this.button1.Location = new System.Drawing.Point(475, 358);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 21);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "使用默认参数";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button_useDefault.Location = new System.Drawing.Point(475, 358);
+            this.button_useDefault.Name = "button_useDefault";
+            this.button_useDefault.Size = new System.Drawing.Size(95, 21);
+            this.button_useDefault.TabIndex = 1;
+            this.button_useDefault.Text = "使用默认参数";
+            this.button_useDefault.UseVisualStyleBackColor = true;
+            this.button_useDefault.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -317,51 +317,51 @@
             this.label11.TabIndex = 33;
             this.label11.Text = "P4需要的资源总量";
             // 
-            // button2
+            // button_refresh
             // 
-            this.button2.BackgroundImage = global::BankerAlgorithm.Properties.Resources.icon_test;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(470, 10);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(41, 36);
-            this.button2.TabIndex = 34;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button_refresh.BackgroundImage = global::BankerAlgorithm.Properties.Resources.icon_test;
+            this.button_refresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_refresh.FlatAppearance.BorderSize = 0;
+            this.button_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_refresh.Location = new System.Drawing.Point(470, 10);
+            this.button_refresh.Name = "button_refresh";
+            this.button_refresh.Size = new System.Drawing.Size(41, 36);
+            this.button_refresh.TabIndex = 34;
+            this.button_refresh.UseVisualStyleBackColor = true;
+            this.button_refresh.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // button_goMain
             // 
-            this.button3.BackgroundImage = global::BankerAlgorithm.Properties.Resources.箭头;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("宋体", 15F);
-            this.button3.Location = new System.Drawing.Point(674, 375);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(68, 63);
-            this.button3.TabIndex = 35;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button_goMain.BackgroundImage = global::BankerAlgorithm.Properties.Resources.箭头;
+            this.button_goMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_goMain.FlatAppearance.BorderSize = 0;
+            this.button_goMain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_goMain.Font = new System.Drawing.Font("宋体", 15F);
+            this.button_goMain.Location = new System.Drawing.Point(674, 375);
+            this.button_goMain.Name = "button_goMain";
+            this.button_goMain.Size = new System.Drawing.Size(68, 63);
+            this.button_goMain.TabIndex = 35;
+            this.button_goMain.UseVisualStyleBackColor = true;
+            this.button_goMain.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // button_export
             // 
-            this.button4.Location = new System.Drawing.Point(666, 22);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 36;
-            this.button4.Text = "导出";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button_export.Location = new System.Drawing.Point(666, 22);
+            this.button_export.Name = "button_export";
+            this.button_export.Size = new System.Drawing.Size(75, 23);
+            this.button_export.TabIndex = 36;
+            this.button_export.Text = "导出";
+            this.button_export.UseVisualStyleBackColor = true;
+            this.button_export.Click += new System.EventHandler(this.button4_Click);
             // 
             // FormBegin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button_export);
+            this.Controls.Add(this.button_goMain);
+            this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -389,7 +389,7 @@
             this.Controls.Add(this.textBoxSC);
             this.Controls.Add(this.textBoxSA);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_useDefault);
             this.Controls.Add(this.label1);
             this.Name = "FormBegin";
             this.Text = "FormBegin";
@@ -402,7 +402,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_useDefault;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxSA;
         private System.Windows.Forms.TextBox textBoxSC;
@@ -430,8 +430,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button_refresh;
+        private System.Windows.Forms.Button button_goMain;
+        private System.Windows.Forms.Button button_export;
     }
 }
