@@ -215,8 +215,6 @@ namespace BankerAlgorithm
         {
             int Tick = 0;
             //if(angle2==0)
-
-            //Console.WriteLine("被调用");
             while (true)
             {
                 if (Tick > angle2)
@@ -279,7 +277,6 @@ namespace BankerAlgorithm
             this.basic.WithDrawTransferEvent += new AlgorithmOperator.WithDrawTransferDelegate(Withdraw);
             this.basic.FlagChangeEvent += new AlgorithmOperator.FlagChangeDelegate(drawFlag);
             this.basic.LabelChangeEvent += new AlgorithmOperator.LabelChangeDelegate(setAvailableLabel);
-
            bool result = this.basic.addRequestT(this.demand.A, this.demand.B, this.demand.C, this.name);
             button_run.Enabled = false;
             if (result&&TransfEvent!=null)

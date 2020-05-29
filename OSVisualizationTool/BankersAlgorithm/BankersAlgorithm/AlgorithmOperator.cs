@@ -370,7 +370,6 @@ namespace BankerAlgorithm
 				}
 
 			}
-			Console.WriteLine("错误出口3");
 			return false;
 		}
 
