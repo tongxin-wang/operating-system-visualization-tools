@@ -171,7 +171,7 @@ namespace BankerAlgorithm
                                 return;
                             }
                     }
-                    FormTest.Export(name+".xml", dic);
+                    OsManager.Export(name+".xml", dic);
                     MessageBox.Show("导出成功");
                     //Form1.Import("test3.xml");
                 }

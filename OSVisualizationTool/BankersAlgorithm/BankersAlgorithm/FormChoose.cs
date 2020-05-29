@@ -45,7 +45,7 @@ namespace BankerAlgorithm
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string path = comboBox_chooseTemp.SelectedItem.ToString()+".xml";
-            dic=FormTest.Import(path);
+            dic=OsManager.Import(path);
             listBox_showAllTemplate.Items.Clear();
             listBox_showAllTemplate.Items.Add("Available:  " + dic["SA"] + "," + dic["SB"] + "," + dic["SC"]);
             for (int i = 0; i < 5; i++)

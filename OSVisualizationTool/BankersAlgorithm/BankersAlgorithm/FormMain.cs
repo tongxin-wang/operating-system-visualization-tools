@@ -189,7 +189,7 @@ namespace BankerAlgorithm
 
             }
         }
-            private void button1_Click(object sender, EventArgs e)
+            private void update_draw(object sender, EventArgs e)
         {
             basic.printPro(basic.ProcessList, basic.available);
             SolidBrush fix_brush = new SolidBrush(Color.LightGreen);
@@ -206,22 +206,15 @@ namespace BankerAlgorithm
                 float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
                 float angleB = Allocation.B * 360 / (Max.B == 0 ? 1 : Max.B);
                 float angleC = Allocation.C * 360 / (Max.C == 0 ? 1 : Max.C);
-                //this.listBox1.Items.Add(angleC);
                 Graphics g=pictureBoxes[i].CreateGraphics();
-                //Bitmap img = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                //pictureBoxes[4 - i].Image = img;
-                //Graphics g = Graphics.FromImage(img);
-                //pictureBoxes[4 - i].Image= getBitMapFile(pictureBox1.Width, pictureBox1.Height);
-               // g.FillPie(fix_brush, rectangle1, 0, 360);
-                activeDrawPie(g,change_brush,warn_brush, rectangle1, -90+history.A, angleA - history.A,100);
+                MyAnimation.AsyncActiveDrawPie(g,change_brush,warn_brush, rectangle1, -90+history.A, angleA - history.A,100);
                 g.FillRectangle(new SolidBrush(Color.White), rectangle1.X, 115, 100, 20);
                 g.DrawString(Allocation.A.ToString() + "/" + Max.A.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle1.X + 30, 115);
-                //g.FillPie(fix_brush, rectangle2, 0, 360);
-                activeDrawPie(g, change_brush, warn_brush, rectangle2, -90+history.B, angleB - history.B, 100);
+                MyAnimation.AsyncActiveDrawPie(g, change_brush, warn_brush, rectangle2, -90+history.B, angleB - history.B, 100);
                 g.FillRectangle(new SolidBrush(Color.White), rectangle2.X, 115, 100, 20);
                 g.DrawString(Allocation.B.ToString() + "/" + Max.B.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle2.X + 30, 115);
-                //g.FillPie(fix_brush, rectangle3, 0, 360);
-                activeDrawPie(g, change_brush, warn_brush, rectangle3, -90+history.C, angleC - history.C,100);
+                MyAnimation.AsyncActiveDrawPie(g, change_brush, warn_brush, rectangle3, -90 + history.C, angleC - history.C, 100);
+                //activeDrawPie(g, change_brush, warn_brush, rectangle3, -90+history.C, angleC - history.C,100);
                 g.FillRectangle(new SolidBrush(Color.White), rectangle3.X, 115, 100, 20);
                 g.DrawString(Allocation.C.ToString() + "/" + Max.C.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle3.X + 30, 115);
                 history.A = angleA;
@@ -230,7 +223,6 @@ namespace BankerAlgorithm
 
 
             }
-              //panels[3].CreateGraphics().DrawLine(new Pen(Color.Blue,10), 1, 1, 100, 100);
         }
 
         private void barReset()
@@ -249,7 +241,7 @@ namespace BankerAlgorithm
                 if (basic.addRequest(trackBarA.Value, trackBarB.Value, trackBarC.Value, comboBox_selectProcess.SelectedItem.ToString()))
                 {
                     barReset();
-                    button1_Click(sender, e);
+                    update_draw(sender, e);
                     foreach (Control control in this.Controls)
                     {
                         if (control is TrackBar)
@@ -307,10 +299,10 @@ namespace BankerAlgorithm
         {
             //basic.addRequest(1, 1, 1, "P4");
             //basic.addRequest(1, 1, 1, "P0");
-            FormOperating form3 = new FormOperating(this.basic,new Resourse(trackBarA.Value, trackBarB.Value, trackBarC.Value), comboBox_selectProcess.SelectedItem.ToString());
-            form3.Show();
-            button1_Click(sender, e);
-            form3.TransfEvent +=new FormOperating.TransfDelegate(refresh);
+            FormOperating formOperating = new FormOperating(this.basic,new Resourse(trackBarA.Value, trackBarB.Value, trackBarC.Value), comboBox_selectProcess.SelectedItem.ToString());
+            formOperating.Show();
+            update_draw(sender, e);
+            formOperating.TransfEvent +=new FormOperating.TransfDelegate(refresh);
         }
         private static bool switchFlag = false;
         private void Switch_btn_Click(object sender, EventArgs e)
@@ -405,6 +397,11 @@ namespace BankerAlgorithm
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            if(this.basic.available.A!=12|| this.basic.available.B != 5|| this.basic.available.C != 9)
+            {
+                MessageBox.Show("无法使用模板，因为你已经进行过资源分配，请点击刷新键重置后再使用模板");
+                return;
+            }
             switch (comboBox_selectTemp.SelectedIndex)
             {
                 case -1:
@@ -415,37 +412,37 @@ namespace BankerAlgorithm
                 case 0:
                     {
                         basic.addRequest(2, 2, 2, "P0");
-                        FormOperating form3 = new FormOperating(this.basic, new Resourse(1,0,1),"P1");
-                        form3.Show();
-                        button1_Click(sender, e);
-                        form3.TransfEvent += new FormOperating.TransfDelegate(refresh);
+                        FormOperating formOperating = new FormOperating(this.basic, new Resourse(1,0,1),"P1");
+                        formOperating.Show();
+                        update_draw(sender, e);
+                        formOperating.TransfEvent += new FormOperating.TransfDelegate(refresh);
                         break;
                     }
                 case 1:
                     {
 
-                        FormOperating form3 = new FormOperating(this.basic, new Resourse(4, 1, 1), "P3");
-                        form3.Show();
-                        button1_Click(sender, e);
-                        form3.TransfEvent += new FormOperating.TransfDelegate(refresh);
+                        FormOperating formOperating = new FormOperating(this.basic, new Resourse(4, 1, 1), "P3");
+                        formOperating.Show();
+                        update_draw(sender, e);
+                        formOperating.TransfEvent += new FormOperating.TransfDelegate(refresh);
                         break;
                     }
                 case 2:
                     {
                         basic.addRequest(3, 3, 3, "P4");
-                        FormOperating form3 = new FormOperating(this.basic, new Resourse(7, 0, 0), "P0");
-                        form3.Show();
-                        button1_Click(sender, e);
-                        form3.TransfEvent += new FormOperating.TransfDelegate(refresh);
+                        FormOperating formOperating = new FormOperating(this.basic, new Resourse(7, 0, 0), "P0");
+                        formOperating.Show();
+                        update_draw(sender, e);
+                        formOperating.TransfEvent += new FormOperating.TransfDelegate(refresh);
                         break;
                     }
                 case 3:
                     {
                         basic.addRequest(3, 3, 3, "P4");
-                        FormOperating form3 = new FormOperating(this.basic, new Resourse(8, 0, 0), "P0");
-                        form3.Show();
-                        button1_Click(sender, e);
-                        form3.TransfEvent += new FormOperating.TransfDelegate(refresh);
+                        FormOperating formOperating = new FormOperating(this.basic, new Resourse(8, 0, 0), "P0");
+                        formOperating.Show();
+                        update_draw(sender, e);
+                        formOperating.TransfEvent += new FormOperating.TransfDelegate(refresh);
                         break;
                     }
                 default:

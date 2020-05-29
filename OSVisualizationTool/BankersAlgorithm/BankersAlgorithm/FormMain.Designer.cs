@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.trackBarB = new System.Windows.Forms.TrackBar();
             this.trackBarC = new System.Windows.Forms.TrackBar();
@@ -40,7 +39,6 @@
             this.label_Aval = new System.Windows.Forms.Label();
             this.label_Cval = new System.Windows.Forms.Label();
             this.label_Bval = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -80,15 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_default.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(464, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "调用银行家算法测试";
             // 
             // listBox1
             // 
@@ -194,15 +183,6 @@
             this.label_Bval.Size = new System.Drawing.Size(19, 20);
             this.label_Bval.TabIndex = 16;
             this.label_Bval.Text = "0";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(583, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(245, 12);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "此窗口显示目前数据，弹新窗口动态展示算法";
             // 
             // label4
             // 
@@ -536,7 +516,6 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.label_Bval);
             this.Controls.Add(this.label_Cval);
@@ -549,10 +528,8 @@
             this.Controls.Add(this.trackBarC);
             this.Controls.Add(this.trackBarB);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("楷体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Name = "FormMain";
-            this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarA)).EndInit();
@@ -569,8 +546,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button_run;
         private System.Windows.Forms.TrackBar trackBarB;
@@ -584,7 +559,6 @@
         private System.Windows.Forms.Label label_Cval;
         private System.Windows.Forms.Label label_Bval;
         private System.Windows.Forms.Button button_refresh;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;

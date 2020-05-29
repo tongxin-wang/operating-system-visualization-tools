@@ -98,7 +98,9 @@
     <Compile Include="FormChoose.Designer.cs">
       <DependentUpon>FormChoose.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyAnimation.cs" />
     <Compile Include="MyDictionary.cs" />
+    <Compile Include="OsManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormTest.resx">

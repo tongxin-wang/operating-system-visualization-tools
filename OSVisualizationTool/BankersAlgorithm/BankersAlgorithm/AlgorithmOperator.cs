@@ -99,14 +99,7 @@ namespace BankerAlgorithm
 	};
     public class AlgorithmOperator
     {
-		public ListBox listBox;
-		private List<PictureBox> pictureBoxes;
-		public void setBoard(List<PictureBox> pictureBoxes)
-		{
-			this.pictureBoxes = pictureBoxes;
-			
-		}
-		public List<Label> labels { set; get; }
+
 		void init( List<Process> processList)
 		{
 
@@ -227,14 +220,25 @@ namespace BankerAlgorithm
 				ProcessList.Add(process);
 			}
 		}
-        /*
+		/*
 		 * -----------------------------------------------------------------------下方是异步绘制的区域---------------------------------------------------------------------------------------------------------------------------------------;
 		 */
 
-        #region
+		#region
+		public delegate void StrInfoTransferDelegate(string info);
+		public event StrInfoTransferDelegate StrInfoTransfEvent;
+		public delegate void DrawInfoTransferDelegate(int index, Resourse demand, Resourse historyHave, Resourse Max, Resourse available, int flag);
+		public event DrawInfoTransferDelegate DrawInfoTransfEvent;
+		public delegate void WarnInfoTransferDelegate(int index, string warn_word);
+		public event WarnInfoTransferDelegate WarnInfoTransfEvent;
+		public delegate void WithDrawTransferDelegate(Process process, List<bool> map, Resourse a, int index);
+		public event WithDrawTransferDelegate WithDrawTransferEvent;
+		public delegate void FlagChangeDelegate(int index,bool flag);
+		public event FlagChangeDelegate FlagChangeEvent;
+		public delegate void LabelChangeDelegate(Resourse available);
+		public event LabelChangeDelegate LabelChangeEvent;
 
-
-        public bool addRequestT(int A, int B, int C, string name)
+		public bool addRequestT(int A, int B, int C, string name)
 		{
 			Resourse demand = new Resourse(A, B, C);
 			Task<bool> tMain = new Task<bool>(() => CheckNewDemandT(name, demand, available, ProcessList));
@@ -242,7 +246,8 @@ namespace BankerAlgorithm
 			Task.WaitAll(tMain);
 			if(tMain.Result)
 			{
-				this.listBox.Items.Add("预分配成功！");
+				//this.listBox.Items.Add("预分配成功！");
+				StrInfoTransfEvent("预分配成功！");
 				for (int i = 0; i < ProcessList.Count; i++)
 				{
 					Process each = ProcessList[i];
@@ -260,154 +265,10 @@ namespace BankerAlgorithm
 			else
 			{
 				printPro(ProcessList, available);
-				this.listBox.Items.Add("预分配失败！");
+				StrInfoTransfEvent("预分配失败！");
 				return false;
 			}
 
-		}
-		void setAvailableLabel(Resourse Available)
-		{
-			labels[0].Text = Available.A<0?"0":Available.A.ToString();
-			labels[1].Text = Available.B < 0 ? "0" : Available.B.ToString();
-			labels[2].Text = Available.C < 0 ? "0" : Available.C.ToString();
-		}
-		void myDrawPie(PictureBox pictureBox,Resourse demand,Resourse historyHave,Resourse Max,int flag)
-		{
-			//                float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
-			listBox.Items.Add("myDrawPie被调用");
-			Graphics g = pictureBox.CreateGraphics();
-			SolidBrush fix_brush = new SolidBrush(Color.LightGreen);
-			SolidBrush change_brush = new SolidBrush(Color.LightSalmon);
-			SolidBrush warn_brush = new SolidBrush(Color.Red);
-			Rectangle rectangle1 = new Rectangle(10, 10, 100, 100);
-			Rectangle rectangle2 = new Rectangle(150, 10, 100, 100);
-			Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
-			float angleA = historyHave.A * 360 / (Max.A == 0 ? 1 : Max.A);
-			float angleB = historyHave.B * 360 / (Max.B == 0 ? 1 : Max.B);
-			float angleC = historyHave.C * 360 / (Max.C == 0 ? 1 : Max.C);
-			float addA = demand.A * 360 / (Max.A == 0 ? 1 : Max.A);
-			float addB = demand.B * 360 / (Max.B == 0 ? 1 : Max.B);
-			float addC = demand.C * 360 / (Max.C == 0 ? 1 : Max.C);
-			Resourse after_add = new Resourse(historyHave.A + demand.A>Max.A?Max.A:historyHave.A + demand.A, historyHave.B + demand.B > Max.B ? Max.B : historyHave.B + demand.B, historyHave.C + demand.C > Max.C ? Max.C : historyHave.C + demand.C);
-			g.FillRectangle(new SolidBrush(Color.White), rectangle1.X, 115, 100, 20);
-			g.DrawString(after_add.A.ToString() + "/" + Max.A.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle1.X + 30, 115);
-			g.FillRectangle(new SolidBrush(Color.White), rectangle2.X, 115, 100, 20);
-			g.DrawString(after_add.B.ToString() + "/" + Max.B.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle2.X + 30, 115);
-			g.FillRectangle(new SolidBrush(Color.White), rectangle3.X, 115, 100, 20);
-			g.DrawString(after_add.C.ToString() + "/" + Max.C.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle3.X + 30, 115);
-			if (flag == 0)
-			{
-				setAvailableLabel(new Resourse(available.A-demand.A , available.B - demand.B, available.C - demand.C));
-				FormOperating.activeDrawPie(g, change_brush, warn_brush, rectangle1, angleA-90, addA, 10);
-				FormOperating.activeDrawPie(g, change_brush, warn_brush, rectangle2, angleB-90, addB, 10);
-				FormOperating.activeDrawPie(g, change_brush, warn_brush, rectangle3, angleC-90, addC, 10);
-
-			}
-			else if(flag==1)
-			{
-				setAvailableLabel(new Resourse(demand.A-Max.A+historyHave.A, demand.B - Max.B + historyHave.B, demand.C - Max.C + historyHave.C));
-				FormOperating.preDrawPie(g, change_brush, warn_brush, rectangle1, angleA-90, addA, 10);
-				FormOperating.preDrawPie(g, change_brush, warn_brush, rectangle2, angleB-90, addB, 10);
-				FormOperating.preDrawPie(g, change_brush, warn_brush, rectangle3, angleC-90, addC, 10);
-
-			}
-
-
-		}
-		void DrawWarn1(PictureBox pictureBox,string word)
-		{	
-			Graphics g = pictureBox.CreateGraphics();
-			g.DrawString(word, new Font("华文楷体", 25), new SolidBrush(Color.DarkRed), new PointF(10, 30));
-		}
-		void Withdraw(PictureBox pictureBox,Process process, List<bool> map,Resourse a,int index)
-		{
-			SolidBrush fix_brush = new SolidBrush(Color.LightGreen);
-			SolidBrush change_brush = new SolidBrush(Color.LightSalmon);
-			SolidBrush warn_brush = new SolidBrush(Color.Red);
-			Rectangle rectangle1 = new Rectangle(10, 10, 100, 100);
-			Rectangle rectangle2 = new Rectangle(150, 10, 100, 100);
-			Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
-
-			//for (int i = 0; i < 5; i++)
-			//{
-			//	Resourse Max = this.ProcessList[i].Max;
-			//	Resourse Allocation = this.ProcessList[i].Allocation;
-			//	float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
-			//	float angleB = Allocation.B * 360 / (Max.B == 0 ? 1 : Max.B);
-			//	float angleC = Allocation.C * 360 / (Max.C == 0 ? 1 : Max.C);
-			//	//Graphics g = pictureBoxes[4 - i].CreateGraphics();
-			//	Bitmap img = new Bitmap(pictureBoxes[i].Width, pictureBoxes[i].Height);
-			//	pictureBoxes[i].Image = img;
-			//	Graphics g = Graphics.FromImage(img);
-			//	g.Clear(Color.White);
-			//	//Graphics g = pictureBox.CreateGraphics();
-			//	g.FillPie(fix_brush, rectangle1, 0, 360);
-			//	g.FillPie(change_brush, rectangle1, -90, angleA);
-			//	if (Max.A == 0)
-			//		g.FillPie(change_brush, rectangle1, 0, 360);
-			//	g.DrawString(Allocation.A.ToString() + "/" + Max.A.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle1.X + 30, 115);
-			//	g.FillPie(fix_brush, rectangle2, 0, 360);
-			//	g.FillPie(change_brush, rectangle2, -90, angleB);
-			//	if (Max.B == 0)
-			//		g.FillPie(change_brush, rectangle2, 0, 360);
-			//	g.DrawString(Allocation.B.ToString() + "/" + Max.B.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle2.X + 30, 115);
-			//	g.FillPie(fix_brush, rectangle3, 0, 360);
-			//	g.FillPie(change_brush, rectangle3, -90, angleC);
-			//	if (Max.C == 0)
-			//		g.FillPie(change_brush, rectangle3, 0, 360);
-			//	g.DrawString(Allocation.C.ToString() + "/" + Max.C.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle3.X + 30, 115);
-
-			//	drawFlag(pictureBoxes[i], map[i]);
-			//}
-
-			Resourse Max = process.Max;
-			Resourse Allocation = process.Allocation;
-			float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
-			float angleB = Allocation.B * 360 / (Max.B == 0 ? 1 : Max.B);
-			float angleC = Allocation.C * 360 / (Max.C == 0 ? 1 : Max.C);
-			//Graphics g = pictureBoxes[4 - i].CreateGraphics();
-			Bitmap img = new Bitmap(pictureBox.Width, pictureBox.Height);
-			pictureBox.Image = img;
-			Graphics g = Graphics.FromImage(img);
-			g.Clear(Color.White);
-			//Graphics g = pictureBox.CreateGraphics();
-			g.FillPie(fix_brush, rectangle1, 0, 360);
-			g.FillPie(change_brush, rectangle1, -90, angleA);
-			if (Max.A == 0)
-				g.FillPie(change_brush, rectangle1, 0, 360);
-			g.DrawString(Allocation.A.ToString() + "/" + Max.A.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle1.X + 30, 115);
-			g.FillPie(fix_brush, rectangle2, 0, 360);
-			g.FillPie(change_brush, rectangle2, -90, angleB);
-			if (Max.B == 0)
-				g.FillPie(change_brush, rectangle2, 0, 360);
-			g.DrawString(Allocation.B.ToString() + "/" + Max.B.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle2.X + 30, 115);
-			g.FillPie(fix_brush, rectangle3, 0, 360);
-			g.FillPie(change_brush, rectangle3, -90, angleC);
-			if (Max.C == 0)
-				g.FillPie(change_brush, rectangle3, 0, 360);
-			g.DrawString(Allocation.C.ToString() + "/" + Max.C.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle3.X + 30, 115);
-
-			drawFlag(pictureBox, map[index]);
-
-			setAvailableLabel(a);
-		}
-		void drawFlag(PictureBox pictureBox,bool flag)
-		{
-			Graphics g = pictureBox.CreateGraphics();
-			g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 45, 15));
-			SolidBrush red_Brush = new SolidBrush(Color.Red);
-			SolidBrush black_Brush = new SolidBrush(Color.Black);
-			if (flag == true)
-				g.DrawString("已完成", new Font("Arial", 10), red_Brush, new Point(0, 2));
-			else
-				g.DrawString("未完成", new Font("Arial", 10), black_Brush, new Point(0, 2));
-		}
-		void drawAll(List<bool> maps)
-		{
-			for(int i=0;i<5;i++)
-			{
-				drawFlag(pictureBoxes[i],maps[i]);
-			}
 		}
 		bool CheckNewDemandT(string name, Resourse demand2, Resourse Available2, List<Process> processList2)
 		{
@@ -421,23 +282,19 @@ namespace BankerAlgorithm
 			{
 				if (processList[i].name != name)
 					continue;
-				//Task t1 = new Task(() => myDrawPie(pictureBoxes[i], demand, processList[i].Allocation, processList[i].Max,0));
-				//t1.Start();
-				//Task.WaitAll(t1);
-				myDrawPie(pictureBoxes[i], demand, processList[i].Allocation, processList[i].Max, 0);
-				listBox.Items.Add("此时等待2000ms");
+				DrawInfoTransfEvent(i, demand, processList[i].Allocation, processList[i].Max, this.available, 0);
+				StrInfoTransfEvent("此时等待2000ms");
 				Thread.Sleep(2000);
 				if (!processList[i].Demand(ref Available, demand))//找到了发出申请的进程
 				{
-					listBox.Items.Add("超出需要");
-					DrawWarn1(pictureBoxes[i], "数量错误,超出需要");
-					//初始数量不对
+					StrInfoTransfEvent("超出需要");
+					WarnInfoTransfEvent(i, "数量错误,超出需要");
 					return false;
 				}
 				else
 				{
 					//printPro(processList, Available);
-					listBox.Items.Add("初步检测通过，开始进行预分配安全性检测");
+					StrInfoTransfEvent("初步检测通过，开始进行预分配安全性检测");
 					List<bool> map = new List<bool>(new bool[] { false, false, false, false, false });
 					//map[i] = true;
 					//cout << "进入复查状态" << endl;
@@ -461,7 +318,7 @@ namespace BankerAlgorithm
 				if (map[i] == true)
 					count++;
 			}
-			drawAll(map);
+			//drawAll(map);
 			if (count == 5)
 			{
 				return true;
@@ -470,11 +327,7 @@ namespace BankerAlgorithm
 			{
 				if (map[i] == true)
 					continue;
-				//listBox.Items.Add("进入预分配阶段,i="+i);
-				//Task t2=new Task(()=>myDrawPie(pictureBoxes[i], Available, processList[i].Allocation, processList[i].Max,1));
-				//t2.Start();
-				//Task.WaitAll(t2);
-				myDrawPie(pictureBoxes[i], Available, processList[i].Allocation, processList[i].Max, 1);
+				DrawInfoTransfEvent(i,Available, processList[i].Allocation, processList[i].Max, this.available, 1);
 				//listBox.Items.Add("到达节点1");
 				if (Functions.AsB(processList[i].Need, Available))//这个地方好像有点重复？
 				{
@@ -482,11 +335,13 @@ namespace BankerAlgorithm
 					{
 						map[i] = true;
 
-						listBox.Items.Add("判定成功,释放资源,此时等待3000ms");
-						drawAll(map);
+						StrInfoTransfEvent("判定成功,释放资源,此时等待3000ms");
+						//drawFlag(pictureBoxes[i], map[i]);
+						FlagChangeEvent(i, map[i]);
+						
 						Functions.AddTo(ref Available, processList[i].Max);
-						setAvailableLabel(Available);
-						Thread.Sleep(3000);
+						LabelChangeEvent(Available);
+						Thread.Sleep(1000);
 						if (CheckStatusT(Available, processList, ref map))
 						{
 							return true;
@@ -495,20 +350,21 @@ namespace BankerAlgorithm
 					}
 					else
 					{
-						DrawWarn1(pictureBoxes[i], "此进程暂时无法完全分配后释放资源,此时等待1000ms1");
+						WarnInfoTransfEvent(i, "此进程暂时无法完全分配后释放资源");
 						Thread.Sleep(1000);
-						Withdraw(pictureBoxes[i], processList[i],map,Available,i);
-						drawAll(map);
+						
+						WithDrawTransferEvent( processList[i],map,Available,i);
+						//drawAll(map);
 						//drawFlag(pictureBoxes[i], map[i]);
 						Thread.Sleep(1000);
 					}
 				}
 				else
 				{
-					DrawWarn1(pictureBoxes[i], "此进程暂时无法完全分配后释放资源,此时等待1000ms2");
+					WarnInfoTransfEvent(i, "此进程暂时无法完全分配后释放资源");
 					Thread.Sleep(1000);
-					Withdraw(pictureBoxes[i], processList[i],map,Available,i);
-					drawAll(map);
+					WithDrawTransferEvent( processList[i],map,Available,i);
+					//drawAll(map);
 					//drawFlag(pictureBoxes[i], map[i]);
 					Thread.Sleep(1000);
 				}
@@ -562,10 +418,6 @@ namespace BankerAlgorithm
 				return false;
 			}
 
-		}
-		public void BaseBox(ListBox listbox)
-		{
-			this.listBox = listbox;
 		}
 	}
 }
