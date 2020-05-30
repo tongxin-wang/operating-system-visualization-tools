@@ -64,7 +64,7 @@ namespace BankerAlgorithm
             setAvailableLabel(a);
             drawFlag(index, map[index]);
         }
-        void DrawWarn1(int index, string word)
+        void DrawWarn(int index, string word)
         {
             Graphics g = pictureBoxes[index].CreateGraphics();
             g.DrawString(word, new Font("华文楷体", 25), new SolidBrush(Color.DarkRed), new PointF(10, 30));
@@ -211,58 +211,6 @@ namespace BankerAlgorithm
 
             }
         }
-        public static void activeDrawPie(Graphics graphics, SolidBrush solidBrush, SolidBrush solidBrush2, Rectangle rectangle, float angle1, float angle2,int interval)
-        {
-            int Tick = 0;
-            //if(angle2==0)
-            while (true)
-            {
-                if (Tick > angle2)
-                {
-                    return;
-                    //Console.WriteLine("Finish");
-                }
-                if (Tick < 270 - angle1)
-                    graphics.FillPie(solidBrush, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
-                else
-                    graphics.FillPie(solidBrush2, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
-                Tick += 5;
-                Thread.Sleep(interval);
-            }
-        }
-        public static void preDrawPie(Graphics graphics, SolidBrush solidBrush, SolidBrush solidBrush2, Rectangle rectangle, float angle1, float angle2, int interval)
-        {
-            float Tick = 0;
-            //Console.WriteLine("被调用");
-            while (true)
-            {
-                if (Tick == angle2 )
-                {
-                    if (Tick < 270 - angle1)
-                    {
-                        graphics.DrawImage(Properties.Resources.x, rectangle);
-                        graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gray)), 0, 0, 405, 148);
-                        //Console.WriteLine("Tick=" + Tick + " angle2=" + angle2);
-                        return;
-                        //Console.WriteLine("Finish");
-                    }
-                    else
-                    {
-                        graphics.DrawImage(Properties.Resources.benefits, rectangle);
-                        return;
-                    }
-                }
-                if (Tick < 270 - angle1)
-                    graphics.FillPie(solidBrush, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
-                else
-                {
-                    graphics.DrawImage(Properties.Resources.benefits, rectangle);
-                    return;
-                }
-                Tick += (angle2 > Tick + 5 ? 5 : angle2 - Tick);
-                Thread.Sleep(interval);
-            }
-        }
         private void Form3_Load(object sender, EventArgs e)
         {
 
@@ -273,7 +221,7 @@ namespace BankerAlgorithm
             drawAll();
             this.basic.StrInfoTransfEvent += new AlgorithmOperator.StrInfoTransferDelegate(newStrInfo);
             this.basic.DrawInfoTransfEvent += new AlgorithmOperator.DrawInfoTransferDelegate(drawSingleBox);
-            this.basic.WarnInfoTransfEvent += new AlgorithmOperator.WarnInfoTransferDelegate(DrawWarn1);
+            this.basic.WarnInfoTransfEvent += new AlgorithmOperator.WarnInfoTransferDelegate(DrawWarn);
             this.basic.WithDrawTransferEvent += new AlgorithmOperator.WithDrawTransferDelegate(Withdraw);
             this.basic.FlagChangeEvent += new AlgorithmOperator.FlagChangeDelegate(drawFlag);
             this.basic.LabelChangeEvent += new AlgorithmOperator.LabelChangeDelegate(setAvailableLabel);

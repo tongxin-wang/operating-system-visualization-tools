@@ -300,6 +300,7 @@ namespace BankerAlgorithm
             //basic.addRequest(1, 1, 1, "P4");
             //basic.addRequest(1, 1, 1, "P0");
             FormOperating formOperating = new FormOperating(this.basic,new Resourse(trackBarA.Value, trackBarB.Value, trackBarC.Value), comboBox_selectProcess.SelectedItem.ToString());
+            formOperating.StartPosition = FormStartPosition.CenterScreen;
             formOperating.Show();
             update_draw(sender, e);
             formOperating.TransfEvent +=new FormOperating.TransfDelegate(refresh);
@@ -413,6 +414,7 @@ namespace BankerAlgorithm
                     {
                         basic.addRequest(2, 2, 2, "P0");
                         FormOperating formOperating = new FormOperating(this.basic, new Resourse(1,0,1),"P1");
+                        formOperating.StartPosition = FormStartPosition.CenterScreen;
                         formOperating.Show();
                         update_draw(sender, e);
                         formOperating.TransfEvent += new FormOperating.TransfDelegate(refresh);

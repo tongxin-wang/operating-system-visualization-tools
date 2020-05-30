@@ -24,7 +24,8 @@ namespace BankerAlgorithm
         private string templateName;
         private void FormBegin_Load(object sender, EventArgs e)
         {
-
+            
+            this.Location = new Point(Screen.GetBounds(this).Width/2-this.Width/2, Screen.GetBounds(this).Height / 2 - this.Height / 2);
         }
         private  void resetAll()
         {
@@ -81,26 +82,10 @@ namespace BankerAlgorithm
         private void button1_Click(object sender, EventArgs e)
         {
             FormChoose formChoose = new FormChoose();
-            formChoose.Show();
             formChoose.TransfEvent += new FormChoose.TransfDelegate(setDefaultToText);
-            //textBoxSA.Text = 12.ToString();
-            //textBoxSB.Text = 5.ToString();
-            //textBoxSC.Text = 9.ToString();
-            //textBox0A.Text = 8.ToString();
-            //textBox0B.Text = 5.ToString();
-            //textBox0C.Text = 3.ToString();
-            //textBox1A.Text = 3.ToString();
-            //textBox1B.Text = 2.ToString();
-            //textBox1C.Text = 3.ToString();
-            //textBox2A.Text = 9.ToString();
-            //textBox2B.Text = 0.ToString();
-            //textBox2C.Text = 3.ToString();
-            //textBox3A.Text = 2.ToString();
-            //textBox3B.Text = 2.ToString();
-            //textBox3C.Text = 2.ToString();
-            //textBox4A.Text = 5.ToString();
-            //textBox4B.Text = 3.ToString();
-            //textBox4C.Text = 3.ToString();
+            formChoose.StartPosition = FormStartPosition.CenterScreen;
+            formChoose.ShowDialog();
+
         }
         private void setDefaultToText(MyDictionary<string,int> dic,string n)
         {
@@ -125,6 +110,7 @@ namespace BankerAlgorithm
             {
                 setDic();
                 FormMain form2 = new FormMain(dic);
+                form2.StartPosition = FormStartPosition.CenterScreen;
                 if (templateName != "default")
                     form2.notMyTemp();
                 form2.Show();
