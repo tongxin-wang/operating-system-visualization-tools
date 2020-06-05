@@ -14,14 +14,16 @@ namespace BankerAlgorithm
     public partial class FormMain : Form
     {
         public delegate void  BackDel();
-        public event BackDel getBack;
-        public AlgorithmOperator basic;
+        public event BackDel getBack;//用于返回选择界面
+        private bool outFlag = false;//用于判断界面close的方式
+        public AlgorithmOperator myOperator;
         List<ListItem> items = new List<ListItem>();
         List<ListItem> defaultItems = new List<ListItem>();
         List<PictureBox> pictureBoxes = new List<PictureBox>();
-        List<AngleCollection> historys = new List<AngleCollection>();
-        private bool outFlag = false;
-        private void historyReset()
+        List<AngleCollection> historys = new List<AngleCollection>();//记录上一次的各参数情况
+        private static bool switchFlag = false;//switch按钮的情况
+        private MyDictionary<string, int> dic;
+        private void historyReset()//更新历史数据的值
         {
             historys.Clear();
             for(int i=0;i<5;i++)
@@ -29,7 +31,7 @@ namespace BankerAlgorithm
                 historys.Add(new AngleCollection(0, 0, 0));
             }
         }
-        private void initAll()
+        private void initAll()//初始化界面和界面属性内容
         {
             historyReset();
             foreach (Control control in this.Controls)
@@ -60,19 +62,20 @@ namespace BankerAlgorithm
             comboBox_selectProcess.DisplayMember = "Text";        //显示
             comboBox_selectProcess.ValueMember = "Value";        //值
             comboBox_selectProcess.DataSource = items;        //绑定数据
-            label_AM.Text = basic.available.A.ToString();
-            label_BM.Text = basic.available.B.ToString();
-            label_CM.Text = basic.available.C.ToString();
-            trackBarA.Maximum = basic.available.A;
-            trackBarB.Maximum = basic.available.B;
-            trackBarC.Maximum = basic.available.C;
+            label_AM.Text = myOperator.available.A.ToString();
+            label_BM.Text = myOperator.available.B.ToString();
+            label_CM.Text = myOperator.available.C.ToString();
+            trackBarA.Maximum = myOperator.available.A;
+            trackBarB.Maximum = myOperator.available.B;
+            trackBarC.Maximum = myOperator.available.C;
             init_draw();
         }
+        //测试用的重载
         public FormMain()
         {
             InitializeComponent();
             //button2.Click += button1_Click;
-            basic = new AlgorithmOperator();
+            myOperator = new AlgorithmOperator();
             initAll();
             
 
@@ -80,39 +83,17 @@ namespace BankerAlgorithm
         public FormMain(MyDictionary<string,int> dic)
         {
             InitializeComponent();
+            this.dic = dic;
             //button2.Click += button1_Click;
-            basic = new AlgorithmOperator(dic);
+            myOperator = new AlgorithmOperator(dic);
             initAll();
            
         }
-        public void notMyTemp()
+        public void notMyTemp()//隐藏请求模板
         {
             groupBox_default.Hide();
         }
-        private static void activePieEvent(Graphics graphics, SolidBrush solidBrush, SolidBrush solidBrush2, Rectangle rectangle, float angle1, float angle2, Timer timer, ref int Tick)
-        {
-            //Console.WriteLine("被调用");
-            if (Tick > angle2)
-            {
-                timer.Stop();
-                //Console.WriteLine("Finish");
-                return;
-            }
-            if (Tick < 270-angle1)
-                graphics.FillPie(solidBrush, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
-            else
-                graphics.FillPie(solidBrush2, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
-            Tick += 5;
-        }
-        public static void activeDrawPie(Graphics graphics, SolidBrush solidBrush, SolidBrush solidBrush2, Rectangle rectangle, float angle1, float angle2, int interval)
-        {
-            Timer timer = new Timer();
-            timer.Interval = interval;
-            int Tick = 0;
-            timer.Tick += new EventHandler((o, e) => activePieEvent(graphics, solidBrush, solidBrush2, rectangle, angle1, angle2, timer, ref Tick));
-            timer.Start();
-        }
-        public void refresh()
+        public void refresh()//立刻更新所有的显示值和绘制情况
         {
             historyReset();
             SolidBrush fix_brush = new SolidBrush(DataBus.fixColor);
@@ -123,8 +104,8 @@ namespace BankerAlgorithm
             Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
             for (int i = 0; i < 5; i++)
             {
-                Resourse Max = basic.ProcessList[i].Max;
-                Resourse Allocation = basic.ProcessList[i].Allocation;
+                Resourse Max = myOperator.ProcessList[i].Max;
+                Resourse Allocation = myOperator.ProcessList[i].Allocation;
                 float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
                 float angleB = Allocation.B * 360 / (Max.B == 0 ? 1 : Max.B);
                 float angleC = Allocation.C * 360 / (Max.C == 0 ? 1 : Max.C);
@@ -156,7 +137,7 @@ namespace BankerAlgorithm
             barReset();
 
         }
-        public void init_draw()
+        public void init_draw()//绘制的初始化
         {
             SolidBrush fix_brush = new SolidBrush(DataBus.fixColor);
             SolidBrush change_brush = new SolidBrush(DataBus.mainColor);
@@ -166,8 +147,8 @@ namespace BankerAlgorithm
             Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
             for (int i = 0; i < 5; i++)
             {
-                Resourse Max = basic.ProcessList[i].Max;
-                Resourse Allocation = basic.ProcessList[i].Allocation;
+                Resourse Max = myOperator.ProcessList[i].Max;
+                Resourse Allocation = myOperator.ProcessList[i].Allocation;
 
                 //Graphics g = pictureBoxes[4 - i].CreateGraphics();
                 Bitmap img = new Bitmap(pictureBoxes[i].Width, pictureBoxes[i].Height);
@@ -192,17 +173,17 @@ namespace BankerAlgorithm
 
             }
         }
-            private void update_draw(object sender, EventArgs e)
+         private void update_draw(object sender, EventArgs e)//动态的绘制更新
         {
-            basic.printPro(basic.ProcessList, basic.available);
+            myOperator.printPro(myOperator.ProcessList, myOperator.available);
             Rectangle rectangle1 = new Rectangle(10, 10, 100, 100);
             Rectangle rectangle2 = new Rectangle(150, 10, 100, 100);
             Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
             for (int i = 0; i < 5; i++)
             {
                 AngleCollection history = historys[i];
-                Resourse Max=basic.ProcessList[i].Max;
-                Resourse Allocation = basic.ProcessList[i].Allocation;
+                Resourse Max=myOperator.ProcessList[i].Max;
+                Resourse Allocation = myOperator.ProcessList[i].Allocation;
                 float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
                 float angleB = Allocation.B * 360 / (Max.B == 0 ? 1 : Max.B);
                 float angleC = Allocation.C * 360 / (Max.C == 0 ? 1 : Max.C);
@@ -210,24 +191,24 @@ namespace BankerAlgorithm
                 MyDrawParam param1 = new MyDrawParam(g);
                 param1.positionRectangle = rectangle1;
                 param1.angleBegin = -90 + history.A;
-                param1.angleEnd = angleA - history.A;
-                param1.interval = 100;
+                param1.angleIncrease = angleA - history.A;
+                param1.interval = DataBus.FormMainActiveInterval;
                 MyAnimation.AsyncActiveDrawPie(param1);
                 g.FillRectangle(new SolidBrush(Color.White), rectangle1.X, 115, 100, 20);
                 g.DrawString(Allocation.A.ToString() + "/" + Max.A.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle1.X + 30, 115);
                 MyDrawParam param2 = new MyDrawParam(g);
                 param2.positionRectangle = rectangle2;
                 param2.angleBegin = -90 + history.B;
-                param2.angleEnd = angleB - history.B;
-                param2.interval = 100;
+                param2.angleIncrease = angleB - history.B;
+                param2.interval = DataBus.FormMainActiveInterval;
                 MyAnimation.AsyncActiveDrawPie(param2);
                 g.FillRectangle(new SolidBrush(Color.White), rectangle2.X, 115, 100, 20);
                 g.DrawString(Allocation.B.ToString() + "/" + Max.B.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle2.X + 30, 115);
                 MyDrawParam param3 = new MyDrawParam(g);
                 param3.positionRectangle = rectangle2;
                 param3.angleBegin = -90 + history.B;
-                param3.angleEnd = angleB - history.B;
-                param3.interval = 100;
+                param3.angleIncrease = angleB - history.B;
+                param3.interval = DataBus.FormMainActiveInterval;
                 MyAnimation.AsyncActiveDrawPie(param3);
                 //activeDrawPie(g, change_brush, warn_brush, rectangle3, -90+history.C, angleC - history.C,100);
                 g.FillRectangle(new SolidBrush(Color.White), rectangle3.X, 115, 100, 20);
@@ -240,21 +221,22 @@ namespace BankerAlgorithm
             }
         }
 
-        private void barReset()
+        private void barReset()//更新trackbar
         {
-                trackBarA.Maximum = basic.available.A;
-                trackBarB.Maximum = basic.available.B;
-                trackBarC.Maximum = basic.available.C;
-                label_AM.Text = basic.available.A.ToString();
-                label_BM.Text = basic.available.B.ToString();
-                label_CM.Text = basic.available.C.ToString();
+                trackBarA.Maximum = myOperator.available.A;
+                trackBarB.Maximum = myOperator.available.B;
+                trackBarC.Maximum = myOperator.available.C;
+                label_AM.Text = myOperator.available.A.ToString();
+                label_BM.Text = myOperator.available.B.ToString();
+                label_CM.Text = myOperator.available.C.ToString();
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void button_confrim_click(object sender, EventArgs e)//开始按钮被点击
         {
-            if (switchFlag == false)
+            if (switchFlag == false)//判断使用的是静态
             {
-                if (basic.addRequest(trackBarA.Value, trackBarB.Value, trackBarC.Value, comboBox_selectProcess.SelectedItem.ToString()))
+                if (myOperator.addRequest(trackBarA.Value, trackBarB.Value, trackBarC.Value, comboBox_selectProcess.SelectedItem.ToString()))//申请成功
                 {
+                    //更新数据，绘制图形
                     barReset();
                     update_draw(sender, e);
                     foreach (Control control in this.Controls)
@@ -271,12 +253,12 @@ namespace BankerAlgorithm
                     MessageBox.Show("请重新分配资源", "分配失败");
                 }
             }
-            else if(switchFlag==true)
+            else if(switchFlag==true)//判断使用的是动态
             {
-                button4_Click(sender, e);
+                ActiveRun(sender, e);//使用动态方式
             }
         }
-
+        //实时更新trackbar对应的label
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
             label_Bval.Text=trackBarB.Value.ToString();
@@ -292,35 +274,15 @@ namespace BankerAlgorithm
             label_Cval.Text = trackBarC.Value.ToString();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-              //listBox1.Items.Add( comboBox1.SelectedItem.ToString());
-        }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ActiveRun(object sender, EventArgs e)//算法动态展示
         {
-            //foreach (Control control in this.Controls)
-            //{
-            //    if (control is TrackBar)
-            //    {
-            //        TrackBar tb = (TrackBar)control;
-            //        tb.Value = 0;
-            //    }
-            //}
-        }
-
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //basic.addRequest(1, 1, 1, "P4");
-            //basic.addRequest(1, 1, 1, "P0");
-            FormOperating formOperating = new FormOperating(this.basic,new Resourse(trackBarA.Value, trackBarB.Value, trackBarC.Value), comboBox_selectProcess.SelectedItem.ToString());
+            FormOperating formOperating = new FormOperating(this.myOperator,new Resourse(trackBarA.Value, trackBarB.Value, trackBarC.Value), comboBox_selectProcess.SelectedItem.ToString());
             formOperating.StartPosition = FormStartPosition.CenterScreen;
             formOperating.Show();
             update_draw(sender, e);
             formOperating.TransfEvent +=new FormOperating.TransfDelegate(refresh);
         }
-        private static bool switchFlag = false;
         private void Switch_btn_Click(object sender, EventArgs e)
         {
             switchFlag = !switchFlag;
@@ -335,29 +297,20 @@ namespace BankerAlgorithm
             Console.WriteLine("Switchflag=" + switchFlag);
         }
 
-        private void button3_Click_1(object sender, EventArgs e)
+        private void ResetAll(object sender, EventArgs e)//重置所有值
         {
             
-            this.basic = new AlgorithmOperator();
+            this.myOperator = new AlgorithmOperator(dic);
             refresh();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void groupBox_default_Paint(object sender, PaintEventArgs e)
+        private void groupBox_default_Paint(object sender, PaintEventArgs e)//将背景初始化为白色
         {
             e.Graphics.Clear(this.BackColor);
         }
 
-        private void groupBox_default_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addInfo(ListBox listBox,int index)
+        private void addInfo(ListBox listBox,int index)//默认模板的内容
         {
                 switch (index)
                 {
@@ -399,7 +352,7 @@ namespace BankerAlgorithm
                         }
                 }
         }
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)//模板选择模块的逻辑处理
         {
             if (comboBox_selectTemp.SelectedIndex != -1)
             {
@@ -411,14 +364,14 @@ namespace BankerAlgorithm
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void useTemp_Click(object sender, EventArgs e)//使用模板运行按钮被点击
         {
-            if(this.basic.available.A!=12|| this.basic.available.B != 5|| this.basic.available.C != 9)
+            if(this.myOperator.available.A!=12|| this.myOperator.available.B != 5|| this.myOperator.available.C != 9)
             {
                 MessageBox.Show("无法使用模板，因为你已经进行过资源分配，请点击刷新键重置后再使用模板");
                 return;
             }
-            switch (comboBox_selectTemp.SelectedIndex)
+            switch (comboBox_selectTemp.SelectedIndex)//模板内容配置并以此生成算法动态展示界面
             {
                 case -1:
                     {
@@ -427,8 +380,8 @@ namespace BankerAlgorithm
                     }
                 case 0:
                     {
-                        basic.addRequest(2, 2, 2, "P0");
-                        FormOperating formOperating = new FormOperating(this.basic, new Resourse(1,0,1),"P1");
+                        myOperator.addRequest(2, 2, 2, "P0");
+                        FormOperating formOperating = new FormOperating(this.myOperator, new Resourse(1,0,1),"P1");
                         formOperating.StartPosition = FormStartPosition.CenterScreen;
                         formOperating.Show();
                         update_draw(sender, e);
@@ -438,7 +391,7 @@ namespace BankerAlgorithm
                 case 1:
                     {
 
-                        FormOperating formOperating = new FormOperating(this.basic, new Resourse(4, 1, 1), "P3");
+                        FormOperating formOperating = new FormOperating(this.myOperator, new Resourse(4, 1, 1), "P3");
                         formOperating.Show();
                         update_draw(sender, e);
                         formOperating.TransfEvent += new FormOperating.TransfDelegate(refresh);
@@ -446,8 +399,8 @@ namespace BankerAlgorithm
                     }
                 case 2:
                     {
-                        basic.addRequest(3, 3, 3, "P4");
-                        FormOperating formOperating = new FormOperating(this.basic, new Resourse(7, 0, 0), "P0");
+                        myOperator.addRequest(3, 3, 3, "P4");
+                        FormOperating formOperating = new FormOperating(this.myOperator, new Resourse(7, 0, 0), "P0");
                         formOperating.Show();
                         update_draw(sender, e);
                         formOperating.TransfEvent += new FormOperating.TransfDelegate(refresh);
@@ -455,8 +408,8 @@ namespace BankerAlgorithm
                     }
                 case 3:
                     {
-                        basic.addRequest(3, 3, 3, "P4");
-                        FormOperating formOperating = new FormOperating(this.basic, new Resourse(8, 0, 0), "P0");
+                        myOperator.addRequest(3, 3, 3, "P4");
+                        FormOperating formOperating = new FormOperating(this.myOperator, new Resourse(8, 0, 0), "P0");
                         formOperating.Show();
                         update_draw(sender, e);
                         formOperating.TransfEvent += new FormOperating.TransfDelegate(refresh);
@@ -470,28 +423,26 @@ namespace BankerAlgorithm
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)//处理不同的退出该界面的情况
         {
 
             Console.WriteLine("Closed");
             if (outFlag == true)
             {
+                //正常关闭
                 Console.WriteLine("isButton");
             }
             //else if (this.button1.is)
             else
             {
+                //是右上角关闭，则结束所有进程
                 Console.WriteLine("Kill");
                 System.Diagnostics.Process.GetCurrentProcess().Kill(); // 杀掉进程
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonBack_Click(object sender, EventArgs e)//返回上一界面重新配置参数
         {
             outFlag = true;
             this.Close();
@@ -500,6 +451,7 @@ namespace BankerAlgorithm
         }
 
     }
+    //为方便处理而建立的角度集合类
     public class AngleCollection
     {
         public float A { get; set; }

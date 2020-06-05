@@ -7,6 +7,10 @@ using System.Xml;
 using System.Xml.Serialization;
 namespace BankerAlgorithm
 {
+    public class nonsence
+    {
+
+    }
     [XmlRoot("dictionary")]
     public class MyDictionary<TKey, TValue>
 

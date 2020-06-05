@@ -16,20 +16,22 @@ namespace BankerAlgorithm
     public partial class FormOperating : Form
     {
         public delegate void TransfDelegate();
-        public event TransfDelegate TransfEvent;
-        private AlgorithmOperator basic;
+        public event TransfDelegate TransfEvent;//将该页面的处理结果传递给上一界面
+        private AlgorithmOperator myOperator;
         List<PictureBox> pictureBoxes = new List<PictureBox>();
         List<Label> avaiLables = new List<Label>();
         public string name;
         public Resourse demand { set; get; }
-        #region
-        public void newStrInfo(string info)
+        #region 绘图部分
+        
+        
+        public void newStrInfo(string info)//算法的提示字符串处理函数
         {
             listBox1.Items.Add(info);
         }
-        //绘图部分
         
-        void Withdraw(Process process, List<bool> map, Resourse a, int index)
+        
+        void Withdraw(Process process, List<bool> map, Resourse a, int index)//分配尝试失败时恢复现场
         {
             SolidBrush fix_brush = new SolidBrush(DataBus.fixColor);
             SolidBrush change_brush = new SolidBrush(DataBus.mainColor);
@@ -67,12 +69,12 @@ namespace BankerAlgorithm
             setAvailableLabel(a);
             drawFlag(index, map[index]);
         }
-        void DrawWarn(int index, string word)
+        void DrawWarn(int index, string word)//绘制警告字
         {
             Graphics g = pictureBoxes[index].CreateGraphics();
             g.DrawString(word, new Font("华文楷体", 25), new SolidBrush(Color.DarkRed), new PointF(10, 30));
         }
-        public void drawFlag(int index, bool flag)
+        public void drawFlag(int index, bool flag)//绘制进程完成情况
         {
             Graphics g = pictureBoxes[index].CreateGraphics();
             g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 45, 15));
@@ -83,20 +85,20 @@ namespace BankerAlgorithm
             else
                 g.DrawString("未完成", new Font("Arial", 10), black_Brush, new Point(0, 2));
         }
-        void drawAll()
+        void drawAll()//绘制所有进程完成情况
         {
             for (int i = 0; i < 5; i++)
             {
                 drawFlag(i, false);
             }
         }
-        void setAvailableLabel(Resourse Available)
+        void setAvailableLabel(Resourse Available)//更新空闲资源的显示标签
         {
             avaiLables[0].Text = Available.A < 0 ? "0" : Available.A.ToString();
             avaiLables[1].Text = Available.B < 0 ? "0" : Available.B.ToString();
             avaiLables[2].Text = Available.C < 0 ? "0" : Available.C.ToString();
         }
-        public void drawSingleBox(int index, Resourse demand, Resourse historyHave, Resourse Max, Resourse available, int flag)
+        public void drawSingleBox(int index, Resourse demand, Resourse historyHave, Resourse Max, Resourse available, int flag)//按照运行给出的数据动态展示算法运行到的当前进程的变化情况
         {
             //                float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
             //listBox1.Items.Add("myDrawPie被调用");
@@ -119,18 +121,18 @@ namespace BankerAlgorithm
             MyDrawParam param1 = new MyDrawParam(g);
             param1.positionRectangle = new Rectangle(10, 10, 100, 100);
             param1.angleBegin = angleA - 90;
-            param1.angleEnd = demand.A * 360 / (Max.A == 0 ? 1 : Max.A);
-            param1.interval = 10;
+            param1.angleIncrease = demand.A * 360 / (Max.A == 0 ? 1 : Max.A);
+            param1.interval = DataBus.FormOperatingActiveInterval;
             MyDrawParam param2 = new MyDrawParam(g);
             param2.positionRectangle = new Rectangle(150, 10, 100, 100);
             param2.angleBegin = angleB - 90;
-            param2.angleEnd = demand.B * 360 / (Max.B == 0 ? 1 : Max.B);
-            param2.interval = 10;
+            param2.angleIncrease = demand.B * 360 / (Max.B == 0 ? 1 : Max.B);
+            param2.interval = DataBus.FormOperatingActiveInterval;
             MyDrawParam param3 = new MyDrawParam(g);
             param3.positionRectangle = new Rectangle(290, 10, 100, 100);
             param3.angleBegin = angleC - 90;
-            param3.angleEnd = demand.C * 360 / (Max.C == 0 ? 1 : Max.C);
-            param3.interval = 10;
+            param3.angleIncrease = demand.C * 360 / (Max.C == 0 ? 1 : Max.C);
+            param3.interval = DataBus.FormOperatingActiveInterval;
             if (flag == 1)
             {
                 MyAnimation.SyncPreDrawPie(param1);
@@ -147,13 +149,13 @@ namespace BankerAlgorithm
 
         }
         #endregion
-        public FormOperating(AlgorithmOperator b,Resourse d,string n)
+        public FormOperating(AlgorithmOperator b,Resourse d,string n)//初始化各控件和属性
         {
             InitializeComponent();
             this.demand = d;
             this.name = n;
             CheckForIllegalCrossThreadCalls = false;
-            this.basic = b;
+            this.myOperator = b;
             foreach (Control control in this.Controls)
             {
                 if (control is PictureBox)
@@ -173,13 +175,13 @@ namespace BankerAlgorithm
                 }
             }
 
-            this.label_avaiA.Text = basic.available.A.ToString();
-            this.label_avaiB.Text = basic.available.B.ToString();
-            this.label_avaiC.Text = basic.available.C.ToString();
+            this.label_avaiA.Text = myOperator.available.A.ToString();
+            this.label_avaiB.Text = myOperator.available.B.ToString();
+            this.label_avaiC.Text = myOperator.available.C.ToString();
             init_draw();
             //listBox1.CheckForIllegalCrossThreadCalls = false;
         }
-        public void init_draw()
+        public void init_draw()//初始化绘制
         {
             SolidBrush fix_brush = new SolidBrush(DataBus.fixColor);
             SolidBrush change_brush = new SolidBrush(Color.LightSalmon);
@@ -189,8 +191,8 @@ namespace BankerAlgorithm
             Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
             for (int i = 0; i < 5; i++)
             {
-                Resourse Max = basic.ProcessList[i].Max;
-                Resourse Allocation = basic.ProcessList[i].Allocation;
+                Resourse Max = myOperator.ProcessList[i].Max;
+                Resourse Allocation = myOperator.ProcessList[i].Allocation;
                 float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
                 float angleB = Allocation.B * 360 / (Max.B == 0 ? 1 : Max.B);
                 float angleC = Allocation.C * 360 / (Max.C == 0 ? 1 : Max.C);
@@ -220,21 +222,16 @@ namespace BankerAlgorithm
 
             }
         }
-        private void Form3_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button_run_Click(object sender, EventArgs e)
+        private void button_run_Click(object sender, EventArgs e)//开始运行
         {
             drawAll();
-            this.basic.StrInfoTransfEvent += new AlgorithmOperator.StrInfoTransferDelegate(newStrInfo);
-            this.basic.DrawInfoTransfEvent += new AlgorithmOperator.DrawInfoTransferDelegate(drawSingleBox);
-            this.basic.WarnInfoTransfEvent += new AlgorithmOperator.WarnInfoTransferDelegate(DrawWarn);
-            this.basic.WithDrawTransferEvent += new AlgorithmOperator.WithDrawTransferDelegate(Withdraw);
-            this.basic.FlagChangeEvent += new AlgorithmOperator.FlagChangeDelegate(drawFlag);
-            this.basic.LabelChangeEvent += new AlgorithmOperator.LabelChangeDelegate(setAvailableLabel);
-           bool result = this.basic.addRequestT(this.demand.A, this.demand.B, this.demand.C, this.name);
+            this.myOperator.StrInfoTransfEvent += new AlgorithmOperator.StrInfoTransferDelegate(newStrInfo);
+            this.myOperator.DrawInfoTransfEvent += new AlgorithmOperator.DrawInfoTransferDelegate(drawSingleBox);
+            this.myOperator.WarnInfoTransfEvent += new AlgorithmOperator.WarnInfoTransferDelegate(DrawWarn);
+            this.myOperator.WithDrawTransferEvent += new AlgorithmOperator.WithDrawTransferDelegate(Withdraw);
+            this.myOperator.FlagChangeEvent += new AlgorithmOperator.FlagChangeDelegate(drawFlag);
+            this.myOperator.LabelChangeEvent += new AlgorithmOperator.LabelChangeDelegate(setAvailableLabel);
+           bool result = this.myOperator.addRequestT(this.demand.A, this.demand.B, this.demand.C, this.name);
             button_run.Enabled = false;
             if (result&&TransfEvent!=null)
                 TransfEvent();
@@ -246,5 +243,6 @@ namespace BankerAlgorithm
             this.Visible = false;
             e.Cancel = true;
         }
+
     }
 }

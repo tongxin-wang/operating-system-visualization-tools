@@ -3,6 +3,7 @@ using System.IO;
 using System.Xml.Serialization;
 namespace BankerAlgorithm
 {
+    //xml文件的输入输出
     class OsManager
     {
         public static void Export(string path, MyDictionary<string, int> test)

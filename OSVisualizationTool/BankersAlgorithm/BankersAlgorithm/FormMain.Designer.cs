@@ -109,7 +109,6 @@
             resources.ApplyResources(this.comboBox_selectProcess, "comboBox_selectProcess");
             this.comboBox_selectProcess.FormattingEnabled = true;
             this.comboBox_selectProcess.Name = "comboBox_selectProcess";
-            this.comboBox_selectProcess.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -298,7 +297,6 @@
             this.groupBox_default.Name = "groupBox_default";
             this.groupBox_default.TabStop = false;
             this.groupBox_default.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox_default_Paint);
-            this.groupBox_default.Enter += new System.EventHandler(this.groupBox_default_Enter);
             // 
             // ucBtn_tempRun
             // 
@@ -321,7 +319,7 @@
             this.ucBtn_tempRun.TabStop = false;
             this.ucBtn_tempRun.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
             this.ucBtn_tempRun.TipsText = "";
-            this.ucBtn_tempRun.BtnClick += new System.EventHandler(this.button1_Click_1);
+            this.ucBtn_tempRun.BtnClick += new System.EventHandler(this.useTemp_Click);
             // 
             // ucBtn_run
             // 
@@ -344,13 +342,12 @@
             this.ucBtn_run.TabStop = false;
             this.ucBtn_run.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
             this.ucBtn_run.TipsText = "";
-            this.ucBtn_run.BtnClick += new System.EventHandler(this.button2_Click);
+            this.ucBtn_run.BtnClick += new System.EventHandler(this.button_confrim_click);
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // ucBtnExt_refresh
             // 
@@ -373,7 +370,7 @@
             this.ucBtnExt_refresh.TabStop = false;
             this.ucBtnExt_refresh.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
             this.ucBtnExt_refresh.TipsText = "";
-            this.ucBtnExt_refresh.BtnClick += new System.EventHandler(this.button3_Click_1);
+            this.ucBtnExt_refresh.BtnClick += new System.EventHandler(this.ResetAll);
             // 
             // groupBox1
             // 
@@ -419,7 +416,7 @@
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // FormMain
             // 

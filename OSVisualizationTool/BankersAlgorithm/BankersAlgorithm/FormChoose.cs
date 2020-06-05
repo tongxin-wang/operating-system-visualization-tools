@@ -22,7 +22,7 @@ namespace BankerAlgorithm
 
             comboBox_chooseTemp.DisplayMember = "Text";        //显示
             comboBox_chooseTemp.ValueMember = "Value";        //值
-
+            //将目前有的模板显示在list中
             string path = @"./";
             DirectoryInfo d = new DirectoryInfo(path);
             List<FileInfo> list = new List<FileInfo>(d.GetFiles());
@@ -34,7 +34,7 @@ namespace BankerAlgorithm
             comboBox_chooseTemp.DataSource = listItems;        //绑定数据 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//选择完毕，触发事件把值传回主界面
         {
             if(TransfEvent!=null)
                 TransfEvent(dic,comboBox_chooseTemp.SelectedItem.ToString());
@@ -42,7 +42,7 @@ namespace BankerAlgorithm
             
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)//显示模板细节
         {
             string path = comboBox_chooseTemp.SelectedItem.ToString()+".xml";
             dic=OsManager.Import(path);

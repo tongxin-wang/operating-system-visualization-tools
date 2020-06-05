@@ -223,7 +223,6 @@
             this.textBox4C.Name = "textBox4C";
             this.textBox4C.Size = new System.Drawing.Size(100, 27);
             this.textBox4C.TabIndex = 23;
-            this.textBox4C.TextChanged += new System.EventHandler(this.textBox17_TextChanged);
             // 
             // textBox4A
             // 
@@ -332,7 +331,7 @@
             this.button_goMain.Size = new System.Drawing.Size(63, 56);
             this.button_goMain.TabIndex = 35;
             this.button_goMain.UseVisualStyleBackColor = true;
-            this.button_goMain.Click += new System.EventHandler(this.button3_Click);
+            this.button_goMain.Click += new System.EventHandler(this.GoToMain);
             // 
             // ucBtn_useDefault
             // 
@@ -359,7 +358,7 @@
             this.ucBtn_useDefault.TabStop = false;
             this.ucBtn_useDefault.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
             this.ucBtn_useDefault.TipsText = "";
-            this.ucBtn_useDefault.BtnClick += new System.EventHandler(this.button1_Click);
+            this.ucBtn_useDefault.BtnClick += new System.EventHandler(this.ShowFormChoose);
             // 
             // ucBtn_export
             // 
@@ -386,7 +385,7 @@
             this.ucBtn_export.TabStop = false;
             this.ucBtn_export.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
             this.ucBtn_export.TipsText = "";
-            this.ucBtn_export.BtnClick += new System.EventHandler(this.button4_Click);
+            this.ucBtn_export.BtnClick += new System.EventHandler(this.ExportTemp);
             // 
             // FormBegin
             // 

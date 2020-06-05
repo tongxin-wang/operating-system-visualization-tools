@@ -43,6 +43,7 @@ namespace BankerAlgorithm
 			C = c;
 		}
 		public Resourse() { }
+		//用于创建深拷贝副本，主要在传参时使用
 		public Resourse Clone()
 		{
 			Resourse r = new Resourse(this.A, this.B, this.C);
@@ -188,10 +189,6 @@ namespace BankerAlgorithm
 		{
 				Console.Write(r.A + "," + r.B + "," + r.C + ";");
 		}
-		void listPrintRes(Resourse r,ListBox listBox)
-		{
-			listBox.Items.Add(r.A + "," + r.B + "," + r.C + ";");
-		}
 		public void printPro(List<Process> processList, Resourse Available)
 		{
 			foreach (var each in processList)
@@ -225,6 +222,7 @@ namespace BankerAlgorithm
 		 */
 
 		#region
+		//以下是所有的交由外部处理的事件接口
 		public delegate void StrInfoTransferDelegate(string info);
 		public event StrInfoTransferDelegate StrInfoTransfEvent;
 		public delegate void DrawInfoTransferDelegate(int index, Resourse demand, Resourse historyHave, Resourse Max, Resourse available, int flag);

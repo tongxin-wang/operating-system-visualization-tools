@@ -1080,21 +1080,6 @@
   <data name="&gt;&gt;label_detail.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucBtn_tempRun.Font" type="System.Drawing.Font, System.Drawing">
-    <value>微软雅黑, 15px</value>
-  </data>
-  <data name="ucBtn_tempRun.Location" type="System.Drawing.Point, System.Drawing">
-    <value>438, 17</value>
-  </data>
-  <data name="ucBtn_tempRun.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucBtn_tempRun.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 34</value>
-  </data>
-  <data name="ucBtn_tempRun.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
-  </data>
   <data name="&gt;&gt;ucBtn_tempRun.Name" xml:space="preserve">
     <value>ucBtn_tempRun</value>
   </data>
@@ -1127,6 +1112,33 @@
   </data>
   <data name="&gt;&gt;groupBox_default.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="ucBtn_tempRun.Font" type="System.Drawing.Font, System.Drawing">
+    <value>微软雅黑, 15px</value>
+  </data>
+  <data name="ucBtn_tempRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>438, 17</value>
+  </data>
+  <data name="ucBtn_tempRun.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucBtn_tempRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 34</value>
+  </data>
+  <data name="ucBtn_tempRun.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="&gt;&gt;ucBtn_tempRun.Name" xml:space="preserve">
+    <value>ucBtn_tempRun</value>
+  </data>
+  <data name="&gt;&gt;ucBtn_tempRun.Type" xml:space="preserve">
+    <value>HZH_Controls.Controls.UCBtnExt, HZH_Controls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucBtn_tempRun.Parent" xml:space="preserve">
+    <value>groupBox_default</value>
+  </data>
+  <data name="&gt;&gt;ucBtn_tempRun.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucBtn_run.Font" type="System.Drawing.Font, System.Drawing">
     <value>微软雅黑, 15px</value>

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Reflection;
 namespace BankerAlgorithm
 {
+    //在使用我的绘制函数时作为传递的参数
     public class MyDrawParam
     {
         public Graphics graphics { get; set; }
@@ -18,7 +19,7 @@ namespace BankerAlgorithm
         public SolidBrush backupBrush { get; set; }
         public Rectangle positionRectangle { get; set; }
         public float angleBegin { get; set; }
-        public float angleEnd { get; set; }
+        public float angleIncrease { get; set; }
         public int interval { get; set; }
         public MyDrawParam(Graphics g)
         {
