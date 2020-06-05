@@ -50,7 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HZH_Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HZH_Controls.1.0.12\lib\net40\HZH_Controls.dll</HintPath>
+      <HintPath>..\packages\HZH_Controls.1.0.12\lib\net40\HZH_Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlgorithmOperator.cs" />
+    <Compile Include="DataBus.cs" />
     <Compile Include="DropItem.cs" />
     <Compile Include="FormTest.cs">
       <SubType>Form</SubType>
@@ -100,6 +101,7 @@
     </Compile>
     <Compile Include="MyAnimation.cs" />
     <Compile Include="MyDictionary.cs" />
+    <Compile Include="MyDrawParam.cs" />
     <Compile Include="OsManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -110,6 +110,7 @@ namespace BankerAlgorithm
             {
                 setDic();
                 FormMain form2 = new FormMain(dic);
+                form2.getBack += new FormMain.BackDel(this.Show);
                 form2.StartPosition = FormStartPosition.CenterScreen;
                 if (templateName != "default")
                     form2.notMyTemp();

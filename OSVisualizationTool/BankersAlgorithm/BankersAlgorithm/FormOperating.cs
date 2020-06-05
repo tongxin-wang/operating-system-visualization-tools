@@ -22,15 +22,18 @@ namespace BankerAlgorithm
         List<Label> avaiLables = new List<Label>();
         public string name;
         public Resourse demand { set; get; }
+        #region
         public void newStrInfo(string info)
         {
             listBox1.Items.Add(info);
         }
+        //绘图部分
+        
         void Withdraw(Process process, List<bool> map, Resourse a, int index)
         {
-            SolidBrush fix_brush = new SolidBrush(Color.LightGreen);
-            SolidBrush change_brush = new SolidBrush(Color.LightSalmon);
-            SolidBrush warn_brush = new SolidBrush(Color.Red);
+            SolidBrush fix_brush = new SolidBrush(DataBus.fixColor);
+            SolidBrush change_brush = new SolidBrush(DataBus.mainColor);
+            SolidBrush warn_brush = new SolidBrush(DataBus.backupColor);
             Rectangle rectangle1 = new Rectangle(10, 10, 100, 100);
             Rectangle rectangle2 = new Rectangle(150, 10, 100, 100);
             Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
@@ -96,22 +99,16 @@ namespace BankerAlgorithm
         public void drawSingleBox(int index, Resourse demand, Resourse historyHave, Resourse Max, Resourse available, int flag)
         {
             //                float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
-            listBox1.Items.Add("myDrawPie被调用");
+            //listBox1.Items.Add("myDrawPie被调用");
             Console.WriteLine(pictureBoxes[index].AccessibilityObject);
 
             Graphics g = this.pictureBoxes[index].CreateGraphics();
-            SolidBrush fix_brush = new SolidBrush(Color.LightGreen);
-            SolidBrush change_brush = new SolidBrush(Color.LightSalmon);
-            SolidBrush warn_brush = new SolidBrush(Color.Red);
             Rectangle rectangle1 = new Rectangle(10, 10, 100, 100);
             Rectangle rectangle2 = new Rectangle(150, 10, 100, 100);
             Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
             float angleA = historyHave.A * 360 / (Max.A == 0 ? 1 : Max.A);
             float angleB = historyHave.B * 360 / (Max.B == 0 ? 1 : Max.B);
             float angleC = historyHave.C * 360 / (Max.C == 0 ? 1 : Max.C);
-            float addA = demand.A * 360 / (Max.A == 0 ? 1 : Max.A);
-            float addB = demand.B * 360 / (Max.B == 0 ? 1 : Max.B);
-            float addC = demand.C * 360 / (Max.C == 0 ? 1 : Max.C);
             Resourse after_add = new Resourse(historyHave.A + demand.A > Max.A ? Max.A : historyHave.A + demand.A, historyHave.B + demand.B > Max.B ? Max.B : historyHave.B + demand.B, historyHave.C + demand.C > Max.C ? Max.C : historyHave.C + demand.C);
             g.FillRectangle(new SolidBrush(Color.White), rectangle1.X, 115, 100, 20);
             g.DrawString(after_add.A.ToString() + "/" + Max.A.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle1.X + 30, 115);
@@ -119,25 +116,37 @@ namespace BankerAlgorithm
             g.DrawString(after_add.B.ToString() + "/" + Max.B.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle2.X + 30, 115);
             g.FillRectangle(new SolidBrush(Color.White), rectangle3.X, 115, 100, 20);
             g.DrawString(after_add.C.ToString() + "/" + Max.C.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle3.X + 30, 115);
-            if (flag == 0)
+            MyDrawParam param1 = new MyDrawParam(g);
+            param1.positionRectangle = new Rectangle(10, 10, 100, 100);
+            param1.angleBegin = angleA - 90;
+            param1.angleEnd = demand.A * 360 / (Max.A == 0 ? 1 : Max.A);
+            param1.interval = 10;
+            MyDrawParam param2 = new MyDrawParam(g);
+            param2.positionRectangle = new Rectangle(150, 10, 100, 100);
+            param2.angleBegin = angleB - 90;
+            param2.angleEnd = demand.B * 360 / (Max.B == 0 ? 1 : Max.B);
+            param2.interval = 10;
+            MyDrawParam param3 = new MyDrawParam(g);
+            param3.positionRectangle = new Rectangle(290, 10, 100, 100);
+            param3.angleBegin = angleC - 90;
+            param3.angleEnd = demand.C * 360 / (Max.C == 0 ? 1 : Max.C);
+            param3.interval = 10;
+            if (flag == 1)
             {
-                //setAvailableLabel(new Resourse(available.A - demand.A, available.B - demand.B, available.C - demand.C));
-                MyAnimation.SyncActiveDrawPie(g, change_brush, warn_brush, rectangle1, angleA - 90, addA, 10);
-                MyAnimation.SyncActiveDrawPie(g, change_brush, warn_brush, rectangle2, angleB - 90, addB, 10);
-                MyAnimation.SyncActiveDrawPie(g, change_brush, warn_brush, rectangle3, angleC - 90, addC, 10);
-
+                MyAnimation.SyncPreDrawPie(param1);
+                MyAnimation.SyncPreDrawPie(param2);
+                MyAnimation.SyncPreDrawPie(param3);
             }
-            else if (flag == 1)
+            else
             {
-                //setAvailableLabel(new Resourse(demand.A - Max.A + historyHave.A, demand.B - Max.B + historyHave.B, demand.C - Max.C + historyHave.C));
-                MyAnimation.SyncPreDrawPie(g, change_brush, warn_brush, rectangle1, angleA - 90, addA, 10);
-                MyAnimation.SyncPreDrawPie(g, change_brush, warn_brush, rectangle2, angleB - 90, addB, 10);
-                MyAnimation.SyncPreDrawPie(g, change_brush, warn_brush, rectangle3, angleC - 90, addC, 10);
-
+                MyAnimation.SyncActiveDrawPie(param1);
+                MyAnimation.SyncActiveDrawPie(param2);
+                MyAnimation.SyncActiveDrawPie(param3);
             }
 
 
         }
+        #endregion
         public FormOperating(AlgorithmOperator b,Resourse d,string n)
         {
             InitializeComponent();
@@ -172,7 +181,7 @@ namespace BankerAlgorithm
         }
         public void init_draw()
         {
-            SolidBrush fix_brush = new SolidBrush(Color.LightGreen);
+            SolidBrush fix_brush = new SolidBrush(DataBus.fixColor);
             SolidBrush change_brush = new SolidBrush(Color.LightSalmon);
             SolidBrush warn_brush = new SolidBrush(Color.Red);
             Rectangle rectangle1 = new Rectangle(10, 10, 100, 100);
@@ -185,7 +194,7 @@ namespace BankerAlgorithm
                 float angleA = Allocation.A * 360 / (Max.A == 0 ? 1 : Max.A);
                 float angleB = Allocation.B * 360 / (Max.B == 0 ? 1 : Max.B);
                 float angleC = Allocation.C * 360 / (Max.C == 0 ? 1 : Max.C);
-                listBox1.Items.Add(angleA+","+angleB + "," + angleC);
+                //listBox1.Items.Add(angleA+","+angleB + "," + angleC);
                 //Graphics g = pictureBoxes[4 - i].CreateGraphics();
                 Bitmap img = new Bitmap(pictureBoxes[i].Width, pictureBoxes[i].Height);
                 pictureBoxes[i].Image = img;

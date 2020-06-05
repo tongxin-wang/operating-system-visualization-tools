@@ -13,11 +13,14 @@ namespace BankerAlgorithm
 
     public partial class FormMain : Form
     {
+        public delegate void  BackDel();
+        public event BackDel getBack;
         public AlgorithmOperator basic;
         List<ListItem> items = new List<ListItem>();
         List<ListItem> defaultItems = new List<ListItem>();
         List<PictureBox> pictureBoxes = new List<PictureBox>();
         List<AngleCollection> historys = new List<AngleCollection>();
+        private bool outFlag = false;
         private void historyReset()
         {
             historys.Clear();
@@ -112,9 +115,9 @@ namespace BankerAlgorithm
         public void refresh()
         {
             historyReset();
-            SolidBrush fix_brush = new SolidBrush(Color.LightGreen);
-            SolidBrush change_brush = new SolidBrush(Color.LightSalmon);
-            SolidBrush warn_brush = new SolidBrush(Color.Red);
+            SolidBrush fix_brush = new SolidBrush(DataBus.fixColor);
+            SolidBrush change_brush = new SolidBrush(DataBus.mainColor);
+            SolidBrush warn_brush = new SolidBrush(DataBus.backupColor);
             Rectangle rectangle1 = new Rectangle(10, 10, 100, 100);
             Rectangle rectangle2 = new Rectangle(150, 10, 100, 100);
             Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
@@ -155,9 +158,9 @@ namespace BankerAlgorithm
         }
         public void init_draw()
         {
-            SolidBrush fix_brush = new SolidBrush(Color.LightGreen);
-            SolidBrush change_brush = new SolidBrush(Color.LightSalmon);
-            SolidBrush warn_brush = new SolidBrush(Color.Red);
+            SolidBrush fix_brush = new SolidBrush(DataBus.fixColor);
+            SolidBrush change_brush = new SolidBrush(DataBus.mainColor);
+            SolidBrush warn_brush = new SolidBrush(DataBus.backupColor);
             Rectangle rectangle1 = new Rectangle(10, 10, 100, 100);
             Rectangle rectangle2 = new Rectangle(150, 10, 100, 100);
             Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
@@ -192,9 +195,6 @@ namespace BankerAlgorithm
             private void update_draw(object sender, EventArgs e)
         {
             basic.printPro(basic.ProcessList, basic.available);
-            SolidBrush fix_brush = new SolidBrush(Color.LightGreen);
-            SolidBrush change_brush = new SolidBrush(Color.LightSalmon);
-            SolidBrush warn_brush = new SolidBrush(Color.Red);
             Rectangle rectangle1 = new Rectangle(10, 10, 100, 100);
             Rectangle rectangle2 = new Rectangle(150, 10, 100, 100);
             Rectangle rectangle3 = new Rectangle(290, 10, 100, 100);
@@ -207,13 +207,28 @@ namespace BankerAlgorithm
                 float angleB = Allocation.B * 360 / (Max.B == 0 ? 1 : Max.B);
                 float angleC = Allocation.C * 360 / (Max.C == 0 ? 1 : Max.C);
                 Graphics g=pictureBoxes[i].CreateGraphics();
-                MyAnimation.AsyncActiveDrawPie(g,change_brush,warn_brush, rectangle1, -90+history.A, angleA - history.A,100);
+                MyDrawParam param1 = new MyDrawParam(g);
+                param1.positionRectangle = rectangle1;
+                param1.angleBegin = -90 + history.A;
+                param1.angleEnd = angleA - history.A;
+                param1.interval = 100;
+                MyAnimation.AsyncActiveDrawPie(param1);
                 g.FillRectangle(new SolidBrush(Color.White), rectangle1.X, 115, 100, 20);
                 g.DrawString(Allocation.A.ToString() + "/" + Max.A.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle1.X + 30, 115);
-                MyAnimation.AsyncActiveDrawPie(g, change_brush, warn_brush, rectangle2, -90+history.B, angleB - history.B, 100);
+                MyDrawParam param2 = new MyDrawParam(g);
+                param2.positionRectangle = rectangle2;
+                param2.angleBegin = -90 + history.B;
+                param2.angleEnd = angleB - history.B;
+                param2.interval = 100;
+                MyAnimation.AsyncActiveDrawPie(param2);
                 g.FillRectangle(new SolidBrush(Color.White), rectangle2.X, 115, 100, 20);
                 g.DrawString(Allocation.B.ToString() + "/" + Max.B.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle2.X + 30, 115);
-                MyAnimation.AsyncActiveDrawPie(g, change_brush, warn_brush, rectangle3, -90 + history.C, angleC - history.C, 100);
+                MyDrawParam param3 = new MyDrawParam(g);
+                param3.positionRectangle = rectangle2;
+                param3.angleBegin = -90 + history.B;
+                param3.angleEnd = angleB - history.B;
+                param3.interval = 100;
+                MyAnimation.AsyncActiveDrawPie(param3);
                 //activeDrawPie(g, change_brush, warn_brush, rectangle3, -90+history.C, angleC - history.C,100);
                 g.FillRectangle(new SolidBrush(Color.White), rectangle3.X, 115, 100, 20);
                 g.DrawString(Allocation.C.ToString() + "/" + Max.C.ToString(), new Font("等线", 14), new SolidBrush(Color.Black), rectangle3.X + 30, 115);
@@ -454,6 +469,36 @@ namespace BankerAlgorithm
                     }
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            Console.WriteLine("Closed");
+            if (outFlag == true)
+            {
+                Console.WriteLine("isButton");
+            }
+            //else if (this.button1.is)
+            else
+            {
+                Console.WriteLine("Kill");
+                System.Diagnostics.Process.GetCurrentProcess().Kill(); // 杀掉进程
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            outFlag = true;
+            this.Close();
+            getBack();
+            this.Dispose();
+        }
+
     }
     public class AngleCollection
     {

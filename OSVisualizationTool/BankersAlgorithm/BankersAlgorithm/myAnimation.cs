@@ -8,9 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
 using Timer = System.Windows.Forms.Timer;
 
 namespace BankerAlgorithm
@@ -27,81 +24,81 @@ namespace BankerAlgorithm
             }
 
         }
-        public static void AsyncActiveDrawPie(Graphics graphics, SolidBrush solidBrush, SolidBrush solidBrush2, Rectangle rectangle, float angle1, float angle2, int interval)
+        public static void AsyncActiveDrawPie(MyDrawParam myDrawParam)
         {
             Timer timer = new Timer();
-            timer.Interval = interval;
+            timer.Interval = myDrawParam.interval;
             int Tick = 0;
-            timer.Tick += new EventHandler((o, e) => AsyncactivePieEvent(graphics, solidBrush, solidBrush2, rectangle, angle1, angle2, timer, ref Tick));
+            timer.Tick += new EventHandler((o, e) => AsyncactivePieEvent(myDrawParam, timer, ref Tick));
             timer.Start();
         }
-        private static void AsyncactivePieEvent(Graphics graphics, SolidBrush solidBrush, SolidBrush solidBrush2, Rectangle rectangle, float angle1, float angle2, Timer timer, ref int Tick)
+        private static void AsyncactivePieEvent(MyDrawParam myDrawParam, Timer timer, ref int Tick)
         {
             //Console.WriteLine("被调用");
-            if (Tick > angle2)
+            if (Tick > myDrawParam.angleEnd)
             {
                 timer.Stop();
                 //Console.WriteLine("Finish");
                 return;
             }
-            if (Tick < 270 - angle1)
-                graphics.FillPie(solidBrush, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
+            if (Tick < 270 - myDrawParam.angleBegin)
+                myDrawParam.graphics.FillPie(myDrawParam.mainBrush, myDrawParam.positionRectangle, myDrawParam.angleBegin + Tick, myDrawParam.angleEnd > Tick + 5 ? 5 : myDrawParam.angleEnd - Tick);
             else
-                graphics.FillPie(solidBrush2, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
+                myDrawParam.graphics.FillPie(myDrawParam.backupBrush, myDrawParam.positionRectangle, myDrawParam.angleBegin + Tick, myDrawParam.angleEnd > Tick + 5 ? 5 : myDrawParam.angleEnd - Tick);
             Tick += 5;
         }
-        public static void SyncPreDrawPie(Graphics graphics, SolidBrush solidBrush, SolidBrush solidBrush2, Rectangle rectangle, float angle1, float angle2, int interval)
+        public static void SyncPreDrawPie(MyDrawParam myDrawParam)
         {
             float Tick = 0;
             //Console.WriteLine("被调用");
             while (true)
             {
-                if (Tick == angle2)
+                if (Tick == myDrawParam.angleEnd)
                 {
-                    if (Tick < 270 - angle1)
+                    if (Tick < 270 - myDrawParam.angleBegin)
                     {
-                        graphics.DrawImage(Properties.Resources.x, rectangle);
-                        graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gray)), 0, 0, 405, 148);
-                        //Console.WriteLine("Tick=" + Tick + " angle2=" + angle2);
+                        myDrawParam.graphics.DrawImage(Properties.Resources.x, myDrawParam.positionRectangle);
+                        myDrawParam.graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gray)), 0, 0, 405, 148);
+                        //Console.WriteLine("Tick=" + Tick + " angleEnd=" + angleEnd);
                         return;
                         //Console.WriteLine("Finish");
                     }
                     else
                     {
-                        graphics.DrawImage(Properties.Resources.benefits, rectangle);
+                        myDrawParam.graphics.DrawImage(Properties.Resources.benefits, myDrawParam.positionRectangle);
                         return;
                     }
                 }
-                if (Tick < 270 - angle1)
-                    graphics.FillPie(solidBrush, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
+                if (Tick < 270 - myDrawParam.angleBegin)
+                    myDrawParam.graphics.FillPie(myDrawParam.mainBrush, myDrawParam.positionRectangle, myDrawParam.angleBegin + Tick, myDrawParam.angleEnd > Tick + 5 ? 5 : myDrawParam.angleEnd - Tick);
                 else
                 {
-                    graphics.DrawImage(Properties.Resources.benefits, rectangle);
+                    myDrawParam.graphics.DrawImage(Properties.Resources.benefits, myDrawParam.positionRectangle);
                     return;
                 }
-                Tick += (angle2 > Tick + 5 ? 5 : angle2 - Tick);
-                Thread.Sleep(interval);
+                Tick += (myDrawParam.angleEnd > Tick + 5 ? 5 : myDrawParam.angleEnd - Tick);
+                Thread.Sleep(myDrawParam.interval);
             }
         }
-        public static void SyncActiveDrawPie(Graphics graphics, SolidBrush solidBrush, SolidBrush solidBrush2, Rectangle rectangle, float angle1, float angle2, int interval)
+        public static void SyncActiveDrawPie(MyDrawParam myDrawParam)
         {
             int Tick = 0;
-            //if(angle2==0)
+            //if(angleEnd==0)
 
             //Console.WriteLine("被调用");
             while (true)
             {
-                if (Tick > angle2)
+                if (Tick > myDrawParam.angleEnd)
                 {
                     return;
                     //Console.WriteLine("Finish");
                 }
-                if (Tick < 270 - angle1)
-                    graphics.FillPie(solidBrush, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
+                if (Tick < 270 - myDrawParam.angleBegin)
+                    myDrawParam.graphics.FillPie(myDrawParam.mainBrush, myDrawParam.positionRectangle, myDrawParam.angleBegin + Tick, myDrawParam.angleEnd > Tick + 5 ? 5 : myDrawParam.angleEnd - Tick);
                 else
-                    graphics.FillPie(solidBrush2, rectangle, angle1 + Tick, angle2 > Tick + 5 ? 5 : angle2 - Tick);
+                    myDrawParam.graphics.FillPie(myDrawParam.backupBrush, myDrawParam.positionRectangle, myDrawParam.angleBegin + Tick, myDrawParam.angleEnd > Tick + 5 ? 5 : myDrawParam.angleEnd - Tick);
                 Tick += 5;
-                Thread.Sleep(interval);
+                Thread.Sleep(myDrawParam.interval);
             }
         }
 

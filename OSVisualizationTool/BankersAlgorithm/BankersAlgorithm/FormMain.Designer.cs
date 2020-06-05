@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.trackBarB = new System.Windows.Forms.TrackBar();
             this.trackBarC = new System.Windows.Forms.TrackBar();
             this.trackBarA = new System.Windows.Forms.TrackBar();
@@ -56,18 +56,23 @@
             this.label17 = new System.Windows.Forms.Label();
             this.comboBox_selectTemp = new System.Windows.Forms.ComboBox();
             this.listBox_tempDetail = new System.Windows.Forms.ListBox();
-            this.button_defaultRun = new System.Windows.Forms.Button();
             this.Switch_btn = new System.Windows.Forms.Button();
-            this.button_run = new System.Windows.Forms.Button();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button_refresh = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label_detail = new System.Windows.Forms.Label();
             this.groupBox_default = new System.Windows.Forms.GroupBox();
+            this.ucBtn_tempRun = new HZH_Controls.Controls.UCBtnExt();
+            this.ucBtn_run = new HZH_Controls.Controls.UCBtnExt();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ucBtnExt_refresh = new HZH_Controls.Controls.UCBtnExt();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarA)).BeginInit();
@@ -77,437 +82,359 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_default.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(779, 751);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(240, 112);
-            this.listBox1.TabIndex = 1;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // trackBarB
             // 
-            this.trackBarB.Location = new System.Drawing.Point(771, 214);
+            resources.ApplyResources(this.trackBarB, "trackBarB");
             this.trackBarB.Name = "trackBarB";
-            this.trackBarB.Size = new System.Drawing.Size(210, 45);
-            this.trackBarB.TabIndex = 5;
             this.trackBarB.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
             // trackBarC
             // 
-            this.trackBarC.Location = new System.Drawing.Point(771, 265);
+            resources.ApplyResources(this.trackBarC, "trackBarC");
             this.trackBarC.Name = "trackBarC";
-            this.trackBarC.Size = new System.Drawing.Size(210, 45);
-            this.trackBarC.TabIndex = 6;
             this.trackBarC.ValueChanged += new System.EventHandler(this.trackBarC_ValueChanged);
             // 
             // trackBarA
             // 
-            this.trackBarA.Location = new System.Drawing.Point(771, 163);
+            resources.ApplyResources(this.trackBarA, "trackBarA");
             this.trackBarA.Name = "trackBarA";
-            this.trackBarA.Size = new System.Drawing.Size(210, 45);
-            this.trackBarA.TabIndex = 7;
             this.trackBarA.ValueChanged += new System.EventHandler(this.trackBarA_ValueChanged);
             // 
             // comboBox_selectProcess
             // 
             this.comboBox_selectProcess.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_selectProcess.Font = new System.Drawing.Font("宋体", 15F);
+            resources.ApplyResources(this.comboBox_selectProcess, "comboBox_selectProcess");
             this.comboBox_selectProcess.FormattingEnabled = true;
-            this.comboBox_selectProcess.Location = new System.Drawing.Point(790, 107);
             this.comboBox_selectProcess.Name = "comboBox_selectProcess";
-            this.comboBox_selectProcess.Size = new System.Drawing.Size(121, 28);
-            this.comboBox_selectProcess.TabIndex = 8;
             this.comboBox_selectProcess.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 20F);
-            this.label2.Location = new System.Drawing.Point(726, 163);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 27);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "A";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("宋体", 20F);
-            this.label5.Location = new System.Drawing.Point(726, 265);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(26, 27);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "C";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("宋体", 20F);
-            this.label6.Location = new System.Drawing.Point(726, 214);
+            resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(26, 27);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "B";
             // 
             // label_Aval
             // 
-            this.label_Aval.AutoSize = true;
-            this.label_Aval.Font = new System.Drawing.Font("宋体", 15F);
-            this.label_Aval.Location = new System.Drawing.Point(984, 163);
+            resources.ApplyResources(this.label_Aval, "label_Aval");
             this.label_Aval.Name = "label_Aval";
-            this.label_Aval.Size = new System.Drawing.Size(19, 20);
-            this.label_Aval.TabIndex = 14;
-            this.label_Aval.Text = "0";
             // 
             // label_Cval
             // 
-            this.label_Cval.AutoSize = true;
-            this.label_Cval.Font = new System.Drawing.Font("宋体", 15F);
-            this.label_Cval.Location = new System.Drawing.Point(984, 265);
+            resources.ApplyResources(this.label_Cval, "label_Cval");
             this.label_Cval.Name = "label_Cval";
-            this.label_Cval.Size = new System.Drawing.Size(19, 20);
-            this.label_Cval.TabIndex = 15;
-            this.label_Cval.Text = "0";
             // 
             // label_Bval
             // 
-            this.label_Bval.AutoSize = true;
-            this.label_Bval.Font = new System.Drawing.Font("宋体", 15F);
-            this.label_Bval.Location = new System.Drawing.Point(984, 214);
+            resources.ApplyResources(this.label_Bval, "label_Bval");
             this.label_Bval.Name = "label_Bval";
-            this.label_Bval.Size = new System.Drawing.Size(19, 20);
-            this.label_Bval.TabIndex = 16;
-            this.label_Bval.Text = "0";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 20F);
-            this.label4.Location = new System.Drawing.Point(30, 85);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 27);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "P0";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("宋体", 20F);
-            this.label7.Location = new System.Drawing.Point(28, 751);
+            resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 27);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "P4";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("宋体", 20F);
-            this.label8.Location = new System.Drawing.Point(35, 583);
+            resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(40, 27);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "P3";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("宋体", 20F);
-            this.label9.Location = new System.Drawing.Point(28, 413);
+            resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 27);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "P2";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("宋体", 20F);
-            this.label10.Location = new System.Drawing.Point(35, 243);
+            resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 27);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "P1";
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("宋体", 20F);
-            this.label11.Location = new System.Drawing.Point(144, 12);
+            resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(26, 27);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "A";
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("宋体", 20F);
-            this.label12.Location = new System.Drawing.Point(287, 12);
+            resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(26, 27);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "B";
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("宋体", 20F);
-            this.label13.Location = new System.Drawing.Point(423, 12);
+            resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(26, 27);
-            this.label13.TabIndex = 30;
-            this.label13.Text = "C";
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("宋体", 15F);
-            this.label14.Location = new System.Drawing.Point(1000, 163);
+            resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(19, 20);
-            this.label14.TabIndex = 31;
-            this.label14.Text = "/";
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("宋体", 15F);
-            this.label15.Location = new System.Drawing.Point(1000, 214);
+            resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(19, 20);
-            this.label15.TabIndex = 32;
-            this.label15.Text = "/";
             // 
             // label16
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("宋体", 15F);
-            this.label16.Location = new System.Drawing.Point(1000, 265);
+            resources.ApplyResources(this.label16, "label16");
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(19, 20);
-            this.label16.TabIndex = 33;
-            this.label16.Text = "/";
             // 
             // label_AM
             // 
-            this.label_AM.AutoSize = true;
-            this.label_AM.Font = new System.Drawing.Font("宋体", 15F);
-            this.label_AM.Location = new System.Drawing.Point(1016, 163);
+            resources.ApplyResources(this.label_AM, "label_AM");
             this.label_AM.Name = "label_AM";
-            this.label_AM.Size = new System.Drawing.Size(29, 20);
-            this.label_AM.TabIndex = 34;
-            this.label_AM.Text = "12";
             // 
             // label_BM
             // 
-            this.label_BM.AutoSize = true;
-            this.label_BM.Font = new System.Drawing.Font("宋体", 15F);
-            this.label_BM.Location = new System.Drawing.Point(1016, 214);
+            resources.ApplyResources(this.label_BM, "label_BM");
             this.label_BM.Name = "label_BM";
-            this.label_BM.Size = new System.Drawing.Size(29, 20);
-            this.label_BM.TabIndex = 35;
-            this.label_BM.Text = "12";
             // 
             // label_CM
             // 
-            this.label_CM.AutoSize = true;
-            this.label_CM.Font = new System.Drawing.Font("宋体", 15F);
-            this.label_CM.Location = new System.Drawing.Point(1016, 265);
+            resources.ApplyResources(this.label_CM, "label_CM");
             this.label_CM.Name = "label_CM";
-            this.label_CM.Size = new System.Drawing.Size(29, 20);
-            this.label_CM.TabIndex = 36;
-            this.label_CM.Text = "12";
             // 
             // label17
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("宋体", 20F);
-            this.label17.Location = new System.Drawing.Point(603, 327);
+            resources.ApplyResources(this.label17, "label17");
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(282, 27);
-            this.label17.TabIndex = 46;
-            this.label17.Text = "是否开启动态过程模拟";
             // 
             // comboBox_selectTemp
             // 
+            this.comboBox_selectTemp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.comboBox_selectTemp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_selectTemp.Font = new System.Drawing.Font("宋体", 15F);
+            resources.ApplyResources(this.comboBox_selectTemp, "comboBox_selectTemp");
+            this.comboBox_selectTemp.ForeColor = System.Drawing.Color.White;
             this.comboBox_selectTemp.FormattingEnabled = true;
-            this.comboBox_selectTemp.Location = new System.Drawing.Point(204, 20);
             this.comboBox_selectTemp.Name = "comboBox_selectTemp";
-            this.comboBox_selectTemp.Size = new System.Drawing.Size(240, 28);
-            this.comboBox_selectTemp.TabIndex = 47;
             this.comboBox_selectTemp.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // listBox_tempDetail
             // 
             this.listBox_tempDetail.FormattingEnabled = true;
-            this.listBox_tempDetail.ItemHeight = 12;
-            this.listBox_tempDetail.Location = new System.Drawing.Point(204, 61);
+            resources.ApplyResources(this.listBox_tempDetail, "listBox_tempDetail");
             this.listBox_tempDetail.Name = "listBox_tempDetail";
-            this.listBox_tempDetail.Size = new System.Drawing.Size(240, 112);
-            this.listBox_tempDetail.TabIndex = 48;
-            // 
-            // button_defaultRun
-            // 
-            this.button_defaultRun.BackgroundImage = global::BankerAlgorithm.Properties.Resources.箭头;
-            this.button_defaultRun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button_defaultRun.FlatAppearance.BorderSize = 0;
-            this.button_defaultRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_defaultRun.Location = new System.Drawing.Point(440, 12);
-            this.button_defaultRun.Name = "button_defaultRun";
-            this.button_defaultRun.Size = new System.Drawing.Size(75, 43);
-            this.button_defaultRun.TabIndex = 49;
-            this.button_defaultRun.UseVisualStyleBackColor = true;
-            this.button_defaultRun.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Switch_btn
             // 
             this.Switch_btn.BackgroundImage = global::BankerAlgorithm.Properties.Resources.switch_OFF__1_;
-            this.Switch_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            resources.ApplyResources(this.Switch_btn, "Switch_btn");
             this.Switch_btn.FlatAppearance.BorderSize = 0;
-            this.Switch_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Switch_btn.Location = new System.Drawing.Point(904, 309);
             this.Switch_btn.Name = "Switch_btn";
-            this.Switch_btn.Size = new System.Drawing.Size(64, 59);
-            this.Switch_btn.TabIndex = 45;
             this.Switch_btn.UseVisualStyleBackColor = true;
             this.Switch_btn.Click += new System.EventHandler(this.Switch_btn_Click);
-            // 
-            // button_run
-            // 
-            this.button_run.BackgroundImage = global::BankerAlgorithm.Properties.Resources.icon_test_1;
-            this.button_run.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button_run.FlatAppearance.BorderSize = 0;
-            this.button_run.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_run.Location = new System.Drawing.Point(992, 295);
-            this.button_run.Name = "button_run";
-            this.button_run.Size = new System.Drawing.Size(85, 86);
-            this.button_run.TabIndex = 3;
-            this.button_run.UseVisualStyleBackColor = true;
-            this.button_run.Click += new System.EventHandler(this.button2_Click);
             // 
             // pictureBox6
             // 
             this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox6.Location = new System.Drawing.Point(85, 43);
+            resources.ApplyResources(this.pictureBox6, "pictureBox6");
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(405, 148);
-            this.pictureBox6.TabIndex = 42;
             this.pictureBox6.TabStop = false;
             // 
             // pictureBox5
             // 
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox5.Location = new System.Drawing.Point(85, 213);
+            resources.ApplyResources(this.pictureBox5, "pictureBox5");
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(405, 155);
-            this.pictureBox5.TabIndex = 41;
             this.pictureBox5.TabStop = false;
             // 
             // pictureBox4
             // 
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox4.Location = new System.Drawing.Point(85, 386);
+            resources.ApplyResources(this.pictureBox4, "pictureBox4");
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(405, 149);
-            this.pictureBox4.TabIndex = 40;
             this.pictureBox4.TabStop = false;
             // 
             // pictureBox3
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox3.Location = new System.Drawing.Point(85, 541);
+            resources.ApplyResources(this.pictureBox3, "pictureBox3");
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(405, 147);
-            this.pictureBox3.TabIndex = 39;
             this.pictureBox3.TabStop = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(85, 705);
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(405, 140);
-            this.pictureBox1.TabIndex = 37;
             this.pictureBox1.TabStop = false;
-            // 
-            // button_refresh
-            // 
-            this.button_refresh.BackgroundImage = global::BankerAlgorithm.Properties.Resources.icon_test;
-            this.button_refresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button_refresh.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.button_refresh.FlatAppearance.BorderSize = 0;
-            this.button_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_refresh.Location = new System.Drawing.Point(937, 105);
-            this.button_refresh.Name = "button_refresh";
-            this.button_refresh.Size = new System.Drawing.Size(31, 30);
-            this.button_refresh.TabIndex = 17;
-            this.button_refresh.UseVisualStyleBackColor = true;
-            this.button_refresh.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // label18
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("宋体", 15F);
-            this.label18.Location = new System.Drawing.Point(29, 20);
+            resources.ApplyResources(this.label18, "label18");
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(169, 20);
-            this.label18.TabIndex = 50;
-            this.label18.Text = "使用默认申请模板";
             // 
             // label_detail
             // 
-            this.label_detail.AutoSize = true;
-            this.label_detail.Font = new System.Drawing.Font("楷体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_detail.Location = new System.Drawing.Point(135, 61);
+            resources.ApplyResources(this.label_detail, "label_detail");
             this.label_detail.Name = "label_detail";
-            this.label_detail.Size = new System.Drawing.Size(63, 13);
-            this.label_detail.TabIndex = 51;
-            this.label_detail.Text = "模板细节";
             // 
             // groupBox_default
             // 
+            this.groupBox_default.Controls.Add(this.ucBtn_tempRun);
             this.groupBox_default.Controls.Add(this.comboBox_selectTemp);
             this.groupBox_default.Controls.Add(this.label_detail);
             this.groupBox_default.Controls.Add(this.listBox_tempDetail);
             this.groupBox_default.Controls.Add(this.label18);
-            this.groupBox_default.Controls.Add(this.button_defaultRun);
             this.groupBox_default.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox_default.Location = new System.Drawing.Point(608, 386);
+            resources.ApplyResources(this.groupBox_default, "groupBox_default");
             this.groupBox_default.Name = "groupBox_default";
-            this.groupBox_default.Size = new System.Drawing.Size(550, 188);
-            this.groupBox_default.TabIndex = 52;
             this.groupBox_default.TabStop = false;
             this.groupBox_default.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox_default_Paint);
             this.groupBox_default.Enter += new System.EventHandler(this.groupBox_default_Enter);
             // 
+            // ucBtn_tempRun
+            // 
+            this.ucBtn_tempRun.BackColor = System.Drawing.Color.White;
+            this.ucBtn_tempRun.BtnBackColor = System.Drawing.Color.White;
+            this.ucBtn_tempRun.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ucBtn_tempRun.BtnForeColor = System.Drawing.Color.White;
+            this.ucBtn_tempRun.BtnText = "使用模板运行";
+            this.ucBtn_tempRun.ConerRadius = 5;
+            this.ucBtn_tempRun.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ucBtn_tempRun.EnabledMouseEffect = false;
+            this.ucBtn_tempRun.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            resources.ApplyResources(this.ucBtn_tempRun, "ucBtn_tempRun");
+            this.ucBtn_tempRun.IsRadius = true;
+            this.ucBtn_tempRun.IsShowRect = true;
+            this.ucBtn_tempRun.IsShowTips = false;
+            this.ucBtn_tempRun.Name = "ucBtn_tempRun";
+            this.ucBtn_tempRun.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.ucBtn_tempRun.RectWidth = 1;
+            this.ucBtn_tempRun.TabStop = false;
+            this.ucBtn_tempRun.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
+            this.ucBtn_tempRun.TipsText = "";
+            this.ucBtn_tempRun.BtnClick += new System.EventHandler(this.button1_Click_1);
+            // 
+            // ucBtn_run
+            // 
+            this.ucBtn_run.BackColor = System.Drawing.Color.White;
+            this.ucBtn_run.BtnBackColor = System.Drawing.Color.White;
+            this.ucBtn_run.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ucBtn_run.BtnForeColor = System.Drawing.Color.White;
+            this.ucBtn_run.BtnText = "开始运行";
+            this.ucBtn_run.ConerRadius = 5;
+            this.ucBtn_run.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ucBtn_run.EnabledMouseEffect = false;
+            this.ucBtn_run.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            resources.ApplyResources(this.ucBtn_run, "ucBtn_run");
+            this.ucBtn_run.IsRadius = true;
+            this.ucBtn_run.IsShowRect = true;
+            this.ucBtn_run.IsShowTips = false;
+            this.ucBtn_run.Name = "ucBtn_run";
+            this.ucBtn_run.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.ucBtn_run.RectWidth = 1;
+            this.ucBtn_run.TabStop = false;
+            this.ucBtn_run.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
+            this.ucBtn_run.TipsText = "";
+            this.ucBtn_run.BtnClick += new System.EventHandler(this.button2_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // ucBtnExt_refresh
+            // 
+            this.ucBtnExt_refresh.BackColor = System.Drawing.Color.White;
+            this.ucBtnExt_refresh.BtnBackColor = System.Drawing.Color.White;
+            this.ucBtnExt_refresh.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ucBtnExt_refresh.BtnForeColor = System.Drawing.Color.White;
+            this.ucBtnExt_refresh.BtnText = "重置数据";
+            this.ucBtnExt_refresh.ConerRadius = 5;
+            this.ucBtnExt_refresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ucBtnExt_refresh.EnabledMouseEffect = false;
+            this.ucBtnExt_refresh.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            resources.ApplyResources(this.ucBtnExt_refresh, "ucBtnExt_refresh");
+            this.ucBtnExt_refresh.IsRadius = true;
+            this.ucBtnExt_refresh.IsShowRect = true;
+            this.ucBtnExt_refresh.IsShowTips = false;
+            this.ucBtnExt_refresh.Name = "ucBtnExt_refresh";
+            this.ucBtnExt_refresh.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.ucBtnExt_refresh.RectWidth = 1;
+            this.ucBtnExt_refresh.TabStop = false;
+            this.ucBtnExt_refresh.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
+            this.ucBtnExt_refresh.TipsText = "";
+            this.ucBtnExt_refresh.BtnClick += new System.EventHandler(this.button3_Click_1);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.ucBtnExt_refresh);
+            this.groupBox1.Controls.Add(this.trackBarB);
+            this.groupBox1.Controls.Add(this.trackBarC);
+            this.groupBox1.Controls.Add(this.ucBtn_run);
+            this.groupBox1.Controls.Add(this.trackBarA);
+            this.groupBox1.Controls.Add(this.comboBox_selectProcess);
+            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.Switch_btn);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label_Aval);
+            this.groupBox1.Controls.Add(this.label_Cval);
+            this.groupBox1.Controls.Add(this.label_Bval);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label_CM);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.label_BM);
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.label_AM);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1155, 857);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox_default);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.Switch_btn);
-            this.Controls.Add(this.button_run);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label_CM);
-            this.Controls.Add(this.label_BM);
-            this.Controls.Add(this.label_AM);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -516,20 +443,8 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button_refresh);
-            this.Controls.Add(this.label_Bval);
-            this.Controls.Add(this.label_Cval);
-            this.Controls.Add(this.label_Aval);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox_selectProcess);
-            this.Controls.Add(this.trackBarA);
-            this.Controls.Add(this.trackBarC);
-            this.Controls.Add(this.trackBarB);
-            this.Controls.Add(this.listBox1);
-            this.Font = new System.Drawing.Font("楷体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Name = "FormMain";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarA)).EndInit();
@@ -540,14 +455,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox_default.ResumeLayout(false);
             this.groupBox_default.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button_run;
         private System.Windows.Forms.TrackBar trackBarB;
         private System.Windows.Forms.TrackBar trackBarC;
         private System.Windows.Forms.TrackBar trackBarA;
@@ -558,7 +473,6 @@
         private System.Windows.Forms.Label label_Aval;
         private System.Windows.Forms.Label label_Cval;
         private System.Windows.Forms.Label label_Bval;
-        private System.Windows.Forms.Button button_refresh;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
@@ -582,9 +496,16 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox comboBox_selectTemp;
         private System.Windows.Forms.ListBox listBox_tempDetail;
-        private System.Windows.Forms.Button button_defaultRun;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label_detail;
         private System.Windows.Forms.GroupBox groupBox_default;
+        private HZH_Controls.Controls.UCBtnExt ucBtn_run;
+        private System.Windows.Forms.Label label1;
+        private HZH_Controls.Controls.UCBtnExt ucBtn_tempRun;
+        private HZH_Controls.Controls.UCBtnExt ucBtnExt_refresh;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button button1;
     }
 }

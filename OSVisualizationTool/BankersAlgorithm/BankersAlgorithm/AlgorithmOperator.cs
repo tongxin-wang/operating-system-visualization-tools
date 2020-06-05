@@ -282,9 +282,8 @@ namespace BankerAlgorithm
 			{
 				if (processList[i].name != name)
 					continue;
+				StrInfoTransfEvent("正在预分配中");
 				DrawInfoTransfEvent(i, demand, processList[i].Allocation, processList[i].Max, this.available, 0);
-				StrInfoTransfEvent("此时等待2000ms");
-				Thread.Sleep(2000);
 				if (!processList[i].Demand(ref Available, demand))//找到了发出申请的进程
 				{
 					StrInfoTransfEvent("超出需要");
@@ -295,6 +294,7 @@ namespace BankerAlgorithm
 				{
 					//printPro(processList, Available);
 					StrInfoTransfEvent("初步检测通过，开始进行预分配安全性检测");
+					Thread.Sleep(500);
 					List<bool> map = new List<bool>(new bool[] { false, false, false, false, false });
 					//map[i] = true;
 					//cout << "进入复查状态" << endl;
@@ -321,6 +321,7 @@ namespace BankerAlgorithm
 			//drawAll(map);
 			if (count == 5)
 			{
+				StrInfoTransfEvent("所有的进程所需资源均被满足");
 				return true;
 			}
 			for (int i = 0; i < processList.Count; i++)
@@ -335,7 +336,7 @@ namespace BankerAlgorithm
 					{
 						map[i] = true;
 
-						StrInfoTransfEvent("判定成功,释放资源,此时等待3000ms");
+						StrInfoTransfEvent("P" + (i) + "判定成功,释放资源");
 						//drawFlag(pictureBoxes[i], map[i]);
 						FlagChangeEvent(i, map[i]);
 						
@@ -350,23 +351,25 @@ namespace BankerAlgorithm
 					}
 					else
 					{
-						WarnInfoTransfEvent(i, "此进程暂时无法完全分配后释放资源");
+						WarnInfoTransfEvent(i, "此进程暂时无法完全分配");
+						StrInfoTransfEvent("P"+(i)+"判定失败，继续尝试");
 						Thread.Sleep(1000);
 						
 						WithDrawTransferEvent( processList[i],map,Available,i);
 						//drawAll(map);
 						//drawFlag(pictureBoxes[i], map[i]);
-						Thread.Sleep(1000);
+						Thread.Sleep(500);
 					}
 				}
 				else
 				{
-					WarnInfoTransfEvent(i, "此进程暂时无法完全分配后释放资源");
+					WarnInfoTransfEvent(i, "此进程暂时无法完全分配");
+					StrInfoTransfEvent("P" + (i) + "判定失败，继续尝试");
 					Thread.Sleep(1000);
 					WithDrawTransferEvent( processList[i],map,Available,i);
 					//drawAll(map);
 					//drawFlag(pictureBoxes[i], map[i]);
-					Thread.Sleep(1000);
+					Thread.Sleep(500);
 				}
 
 			}
