@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{26CFFF16-D169-4DCD-9B6C-913F727C2B12}</ProjectGuid>
+    <ProjectGuid>{410BA3AD-0A3D-45E8-9950-F1A938CD7ABA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WinFormMemAllocation</RootNamespace>
-    <AssemblyName>WinFormMemAllocation</AssemblyName>
+    <RootNamespace>ProcessorScheduling</RootNamespace>
+    <AssemblyName>ProcessorScheduling</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,25 +50,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormInit.cs">
+    <Compile Include="Algorithm.cs" />
+    <Compile Include="Form\ProcessorMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormInit.Designer.cs">
-      <DependentUpon>FormInit.cs</DependentUpon>
+    <Compile Include="Form\ProcessorMainForm.Designer.cs">
+      <DependentUpon>ProcessorMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs">
+    <Compile Include="Form\ProcessorWorkForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
+    <Compile Include="Form\ProcessorWorkForm.Designer.cs">
+      <DependentUpon>ProcessorWorkForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsDraw.cs" />
+    <Compile Include="Process.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormInit.resx">
-      <DependentUpon>FormInit.cs</DependentUpon>
+    <EmbeddedResource Include="Form\ProcessorMainForm.resx">
+      <DependentUpon>ProcessorMainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
+    <EmbeddedResource Include="Form\ProcessorWorkForm.resx">
+      <DependentUpon>ProcessorWorkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -93,12 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MemoryAllocation\MemoryAllocation.csproj">
-      <Project>{ffe0065f-7aca-4e88-910f-30999f698bb1}</Project>
-      <Name>MemoryAllocation</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
