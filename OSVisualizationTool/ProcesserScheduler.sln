@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EX2", "EX2\EX2\EX2.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryAllocation", "MemoryAllocation\MemoryAllocation.csproj", "{FFE0065F-7ACA-4E88-910F-30999F698BB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAnimationTest1", "CSharpAnimationTest1\CSharpAnimationTest1\CSharpAnimationTest1.csproj", "{CE538938-0043-4BC4-A889-947AB76DB471}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankersAlgorithm", "BankersAlgorithm\BankersAlgorithm\BankersAlgorithm.csproj", "{CE538938-0043-4BC4-A889-947AB76DB471}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormMemAllocation", "WinFormMemAllocation\WinFormMemAllocation.csproj", "{26CFFF16-D169-4DCD-9B6C-913F727C2B12}"
 EndProject
