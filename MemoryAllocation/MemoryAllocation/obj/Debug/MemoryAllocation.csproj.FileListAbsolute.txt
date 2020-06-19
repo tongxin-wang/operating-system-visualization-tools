@@ -1,6 +1,0 @@
-E:\c#大作业\MemoryAllocation\MemoryAllocation\bin\Debug\MemoryAllocation.exe.config
-E:\c#大作业\MemoryAllocation\MemoryAllocation\bin\Debug\MemoryAllocation.exe
-E:\c#大作业\MemoryAllocation\MemoryAllocation\bin\Debug\MemoryAllocation.pdb
-E:\c#大作业\MemoryAllocation\MemoryAllocation\obj\Debug\MemoryAllocation.csprojAssemblyReference.cache
-E:\c#大作业\MemoryAllocation\MemoryAllocation\obj\Debug\MemoryAllocation.exe
-E:\c#大作业\MemoryAllocation\MemoryAllocation\obj\Debug\MemoryAllocation.pdb
